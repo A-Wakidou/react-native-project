@@ -1,20 +1,59 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './pages/index.js'
+import Account from './pages/account.js'
+import Search from './pages/search.js'
+import { UsersApi } from './generated/api.ts';
+import { Configuration } from './generated/configuration.ts';
 
-export default function App() {
+const HomeStack = createNativeStackNavigator();
+
+function HomeStackScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={Home} />
+    </HomeStack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const AccountStack = createNativeStackNavigator();
+
+function AccountStackScreen() {
+  return (
+    <AccountStack.Navigator>
+      <AccountStack.Screen name="Account" component={Account} />
+    </AccountStack.Navigator>
+  );
+}
+
+const SearchStack = createNativeStackNavigator();
+
+function SearchStackScreen() {
+  return (
+    <SearchStack.Navigator>
+      <SearchStack.Screen name="Search" component={Search} />
+    </SearchStack.Navigator>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  new UsersApi(Configuration, 'http://localhost:3000').usersControllerFindAll()
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  return (
+    <NavigationContainer>
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Screen name="HomeStackScreen" component={HomeStackScreen} />
+        <Tab.Screen name="SearchStackScreen" component={SearchStackScreen} />
+        <Tab.Screen name="AccountStackScreen" component={AccountStackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
