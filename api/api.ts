@@ -90,6 +90,12 @@ export interface CreateProductDto {
      * @type {string}
      * @memberof CreateProductDto
      */
+    'category'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateProductDto
+     */
     'description'?: string;
     /**
      * 
@@ -234,6 +240,12 @@ export interface UpdateProductDto {
      * @memberof UpdateProductDto
      */
     'brand'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateProductDto
+     */
+    'category'?: string;
     /**
      * 
      * @type {string}
