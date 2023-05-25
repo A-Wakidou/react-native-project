@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Final project\'s back-end API
- * The back-end API for final-project
+ * Back-end API for final-project
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -13,6 +13,18 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
+
+/**
+ * 
+ * @export
+ * @interface UpdateCategoryDto
+ */
+export interface UpdateCategoryDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateCategoryDto
+     */
+    'name'?: string;
+}
 

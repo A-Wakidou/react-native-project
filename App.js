@@ -4,8 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './pages/index.js'
 import Account from './pages/account.js'
 import Search from './pages/search.js'
-import { UsersApi } from './generated/api.ts';
-import { Configuration } from './generated/configuration.ts';
+import { ProductsApi } from './client/api.ts';
+import { Configuration } from './client/configuration.ts';
 
 const HomeStack = createNativeStackNavigator();
 
@@ -40,7 +40,7 @@ function SearchStackScreen() {
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  new UsersApi(Configuration, 'http://localhost:3000').usersControllerFindAll()
+  new ProductsApi(Configuration, 'http://localhost:3000').productsControllerFindAll()
     .then((res) => {
       console.log(res);
     })
