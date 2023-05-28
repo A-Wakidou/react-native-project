@@ -10,8 +10,7 @@ const Header = () => {
                 padding: 20,
                 alignItems: 'center'
             }}>
-            <Image style={{ width: 50, height: 50 }} source={require('../assets/images/logo-blue-rounded.svg')}
-            ></Image>
+            <Image style={{ width: 50, height: 50 }} source={require('../assets/images/logo-blue-rounded.svg')}/>
             <TextInput style={{ marginLeft: 10, width: '100%', fontSize: '0.8rem' }} placeholder="Rechercher" />
         </View>
     );
