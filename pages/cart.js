@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 
-const Home = () => {
+const Cart = () => {
     return (
         <View
             style={{
@@ -8,11 +8,9 @@ const Home = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-            <View style={{ backgroundImage: '../' }} >
-
-            </View>
+            <Text>Hello Cart!</Text>
         </View>
     );
 };
 
-export default Home;
+export default Cart;
