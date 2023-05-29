@@ -1,4 +1,4 @@
-import {SafeAreaView, StatusBar} from 'react-native'
+import { SafeAreaView, StatusBar } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -63,7 +63,7 @@ export default function App() {
   //     console.log(err)
   //   })
   return (
-    <SafeAreaView style={{flex: 1, paddingTop: StatusBar.currentHeight}}>
+    <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
       <NavigationContainer>
         <Header style={{ height: 130 }} />
         <Tab.Navigator navigationOptions={{ header: null }} screenOptions={{
@@ -79,16 +79,16 @@ export default function App() {
               <MaterialCommunityIcons name="home" color={color} size={size} />
             )
           }} />
-          <Tab.Screen name="CartScreen" component={CartStackScreen} options={{
-            // title: 'Cart',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="cart" color={color} size={size} />
-            )
-          }} />
           <Tab.Screen name="SearchScreen" component={SearchStackScreen} options={{
             // title: 'Search',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="store-search" color={color} size={size} />
+            )
+          }} />
+          <Tab.Screen name="CartScreen" component={CartStackScreen} options={{
+            // title: 'Cart',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="cart" color={color} size={size} />
             )
           }} />
           <Tab.Screen name="AccountScreen" component={AccountStackScreen} options={{
