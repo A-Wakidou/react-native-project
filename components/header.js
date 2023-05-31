@@ -1,6 +1,18 @@
 import { Image, View, TextInput } from 'react-native';
+import {useState} from 'react'
 
-const Header = () => {
+const Header = ({navigation}) => {
+
+    const [text, setText] = useState('')
+
+    function handleChange(event) {
+        setText(event.target.value);
+    }
+
+    function submit() {
+        navigation.navigate('Results', {query: text})
+    }
+
     return (
         <View
             style={{
@@ -11,7 +23,7 @@ const Header = () => {
                 alignItems: 'center'
             }}>
             <Image style={{ width: 50, height: 50 }} source={require('../assets/images/logo-blue-rounded.svg')}/>
-            <TextInput style={{ marginLeft: 10, width: '100%', fontSize: '0.8rem' }} placeholder="Rechercher" />
+            <TextInput onSubmitEditing={submit} onChange={handleChange} style={{ marginLeft: 10, width: '100%', fontSize: '0.8rem' }} placeholder="Rechercher" />
         </View>
     );
 };

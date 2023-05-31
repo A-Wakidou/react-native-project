@@ -4,7 +4,7 @@ const ProductCard = (props) => {
     props = props.item ? props.item : props
     return (
         <View style={{
-            width: 120,
+            width: 130,
             marginRight: '1rem'
         }}>
             <View
@@ -17,7 +17,7 @@ const ProductCard = (props) => {
                     justifyContent: 'center',
                     borderRadius: 5
                 }}>
-                <Image style={{ width: 50, height: 50 }} source={props.path}/>
+                <Image resizeMode='contain' style={{ width:'100%', height: 80 }} source={props.path}/>
             </View>
             <Text style={{fontSize: '1rem', fontWeight: 400, marginTop: '0.1rem', fontFamily:'Glory, serif'}}>{props.title}</Text>
             <Text style={{fontSize: '1rem', fontWeight: 600, marginTop: '0.2rem', fontFamily:'Glory, serif'}}>{props.price}€</Text>

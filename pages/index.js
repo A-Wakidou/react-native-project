@@ -104,15 +104,15 @@ const Home = () => {
                 <View style={styles.cardContainer}>
                     <View style={styles.card}>
                         <Text style={styles.cardText}>Reprendre vos achats</Text>
-                        <Image style={{ width: 50, height: 60, display: 'block', margin: '0 auto' }} source={require('../assets/images/exMonitor.svg')}/>
+                        <Image style={{ width: 50, height: 60 }} source={require('../assets/images/exMonitor.svg')}/>
                     </View>
                     <View style={styles.card}>
                         <Text style={styles.cardText}>Sélectionnés pour vous</Text>
-                        <Image style={{ width: 50, height: 60, display: 'block', margin: '0 auto' }} source={require('../assets/images/exEquipment.svg')}/>
+                        <Image style={{ width: 50, height: 60 }} source={require('../assets/images/exEquipment.svg')}/>
                     </View>
                     <View style={styles.card}>
                         <Text style={styles.cardText}>Acheter à nouveau</Text>
-                        <Image style={{ width: 50, height: 60, display: 'block', margin: '0 auto' }} source={require('../assets/images/exMouse.svg')}/>
+                        <Image style={{ width: 50, height: 60 }} source={require('../assets/images/exMouse.svg')}/>
                     </View>
                 </View>
             </ImageBackground>
@@ -127,14 +127,14 @@ const Home = () => {
             <View style={styles.brandSection}>
                 <Text style={styles.productsSectionTitle}>Razer</Text>
                 <View style={{backgroundColor:'#2d2d2d', borderRadius: 5, marginBottom: '1rem'}}>
-                    <Image source={require('../assets/images/exEquipment.svg')} style={{width: '100%',height:200}}/>
+                    <Image source={require('../assets/images/exEquipment.svg')} resizeMode='contain' style={{width: '100%',height:200}}/>
                 </View>
                 <View style={{flex: 1,flexDirection:'row'}}>
-                    <View style={{flex:1,backgroundColor:'#2d2d2d', borderRadius: 5, marginBottom: '1rem', marginRight: 1}}>
-                        <Image source={require('../assets/images/exPC.svg')} style={{width: '100%',height:150}}/>
+                    <View style={{flex:1,backgroundColor:'#2d2d2d', borderRadius: 5, marginRight: 1, padding: 10, alignItems: 'center'}}>
+                        <Image source={require('../assets/images/exPC.svg')} resizeMode='contain' style={{width: '60%',height:150}}/>
                     </View>
-                    <View style={{flex:1,backgroundColor:'#2d2d2d', borderRadius: 5, marginBottom: '1rem'}}>
-                        <Image source={require('../assets/images/exRam.svg')} style={{width: '100%',height:150}}/>
+                    <View style={{flex:1,backgroundColor:'#2d2d2d', borderRadius: 5, padding: 10, alignItems: 'center'}}>
+                        <Image source={require('../assets/images/exRam.svg')} resizeMode='contain' style={{width: '70%',height:150}}/>
                     </View>
                 </View>
             </View>
