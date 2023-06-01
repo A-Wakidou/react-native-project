@@ -1,6 +1,10 @@
 import { Text, View } from 'react-native';
+import Header from '../components/header.js';
 
 const Account = () => {
+    function goTo(text) {
+        navigation.navigate('Results', { query: text })
+    }
     return (
         <View
             style={{
@@ -8,6 +12,7 @@ const Account = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
+            <Header goTo={goTo} />
             <Text>Hello account!</Text>
         </View>
     );

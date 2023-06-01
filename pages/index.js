@@ -1,5 +1,6 @@
 import { Text, View, Image, ImageBackground, StyleSheet, FlatList, ScrollView } from 'react-native';
 import ProductCard from '../components/productCard';
+import Header from '../components/header.js';
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     productsSection: {
-        flex:1,
+        flex: 1,
         marginTop: 40,
         marginLeft: 20,
     },
@@ -94,47 +95,51 @@ const response2 = [
     }
 ]
 
-const Home = () => {
+const Home = ({ navigation, route }) => {
+    function goTo(text) {
+        navigation.navigate('Results', { query: text })
+    }
     return (
         <ScrollView
             style={{
                 flex: 1
             }}>
-            <ImageBackground source={require('../assets/images/home-header.svg')} resizeMode="cover" style={{width: '100%',height:400}}>
+            <Header mode='transparent' goTo={goTo} />
+            <ImageBackground source={require('../assets/images/home-header.svg')} resizeMode="cover" style={{ width: '100%', height: 400 }}>
                 <View style={styles.cardContainer}>
                     <View style={styles.card}>
                         <Text style={styles.cardText}>Reprendre vos achats</Text>
-                        <Image style={{ width: 50, height: 60 }} source={require('../assets/images/exMonitor.svg')}/>
+                        <Image style={{ width: 50, height: 60 }} source={require('../assets/images/exMonitor.svg')} />
                     </View>
                     <View style={styles.card}>
                         <Text style={styles.cardText}>Sélectionnés pour vous</Text>
-                        <Image style={{ width: 50, height: 60 }} source={require('../assets/images/exEquipment.svg')}/>
+                        <Image style={{ width: 50, height: 60 }} source={require('../assets/images/exEquipment.svg')} />
                     </View>
                     <View style={styles.card}>
                         <Text style={styles.cardText}>Acheter à nouveau</Text>
-                        <Image style={{ width: 50, height: 60 }} source={require('../assets/images/exMouse.svg')}/>
+                        <Image style={{ width: 50, height: 60 }} source={require('../assets/images/exMouse.svg')} />
                     </View>
                 </View>
             </ImageBackground>
             <View style={styles.productsSection}>
                 <Text style={styles.productsSectionTitle}>Top produits</Text>
-                <FlatList horizontal={true} style={{width: '100%'}} data={response} keyExtractor={response => response.title} renderItem={ProductCard}/>
+                <FlatList horizontal={true} style={{ width: '100%' }} data={response} keyExtractor={response => response.title} renderItem={ProductCard} />
             </View>
             <View style={styles.productsSection}>
                 <Text style={styles.productsSectionTitle}>Tendance</Text>
-                <FlatList horizontal={true} style={{width: '100%'}} data={response2} keyExtractor={response => response.title} renderItem={ProductCard}/>
+                <FlatList horizontal={true} style={{ width: '100%' }} data={response2} keyExtractor={response => response.title} renderItem={ProductCard} />
             </View>
             <View style={styles.brandSection}>
                 <Text style={styles.productsSectionTitle}>Razer</Text>
-                <View style={{backgroundColor:'#2d2d2d', borderRadius: 5, marginBottom: '1rem'}}>
-                    <Image source={require('../assets/images/exEquipment.svg')} resizeMode='contain' style={{width: '100%',height:200}}/>
+                <View style={{ backgroundColor: '#2d2d2d', borderRadius: 5, marginBottom: '1rem' }}>
+                    <Image source={require('../assets/images/exEquipment.svg')} resizeMode='contain' style={{ width: '100%', height: 200 }} />
                 </View>
-                <View style={{flex: 1,flexDirection:'row'}}>
-                    <View style={{flex:1,backgroundColor:'#2d2d2d', borderRadius: 5, marginRight: 1, padding: 10, alignItems: 'center'}}>
-                        <Image source={require('../assets/images/exPC.svg')} resizeMode='contain' style={{width: '60%',height:150}}/>
+                <View style={{ flex: 1, flexDirection: 'row' }}>
+                    <View style={{ flex: 1, backgroundColor: '#2d2d2d', borderRadius: 5, marginRight: 1, padding: 10, alignItems: 'center' }}>
+                        <Image source={require('../assets/images/exPC.svg')} resizeMode='contain' style={{ width: '60%', height: 150 }} />
                     </View>
-                    <View style={{flex:1,backgroundColor:'#2d2d2d', borderRadius: 5, padding: 10, alignItems: 'center'}}>
-                        <Image source={require('../assets/images/exRam.svg')} resizeMode='contain' style={{width: '70%',height:150}}/>
+                    <View style={{ flex: 1, backgroundColor: '#2d2d2d', borderRadius: 5, padding: 10, alignItems: 'center' }}>
+                        <Image source={require('../assets/images/exRam.svg')} resizeMode='contain' style={{ width: '70%', height: 150 }} />
                     </View>
                 </View>
             </View>

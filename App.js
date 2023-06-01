@@ -8,7 +8,6 @@ import Cart from './pages/cart.js'
 import Account from './pages/account.js'
 import Search from './pages/search.js'
 import Results from './pages/results.js'
-import Header from './components/header.js';
 import './assets/styles/index.css'
 
 const HomeStack = createNativeStackNavigator();
@@ -17,6 +16,7 @@ function HomeStackScreen() {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="Home" component={Home} />
+      <HomeStack.Screen name="Results" component={Results} />
     </HomeStack.Navigator>
   );
 }
@@ -27,6 +27,7 @@ function CartStackScreen() {
   return (
     <CartStack.Navigator screenOptions={{ headerShown: false }}>
       <CartStack.Screen name="Cart" component={Cart} />
+      <CartStack.Screen name="Results" component={Results} />
     </CartStack.Navigator>
   );
 }
@@ -37,6 +38,7 @@ function AccountStackScreen() {
   return (
     <AccountStack.Navigator screenOptions={{ headerShown: false }}>
       <AccountStack.Screen name="Account" component={Account} />
+      <AccountStack.Screen name="Results" component={Results} />
     </AccountStack.Navigator>
   );
 }
@@ -55,10 +57,10 @@ function SearchStackScreen() {
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
       <NavigationContainer>
-        <Header style={{ height: 130 }} />
         <Tab.Navigator navigationOptions={{ header: null }} screenOptions={{
           tabBarStyle: { height: 80 },
           tabBarActiveTintColor: '#5F9EC2',
