@@ -8,6 +8,8 @@ import Cart from './pages/cart.js'
 import Account from './pages/account.js'
 import Search from './pages/search.js'
 import Results from './pages/results.js'
+import Product from './pages/product.js'
+
 import './assets/styles/index.css'
 
 const HomeStack = createNativeStackNavigator();
@@ -17,6 +19,7 @@ function HomeStackScreen() {
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="Home" component={Home} />
       <HomeStack.Screen name="Results" component={Results} />
+      <HomeStack.Screen name="Product" component={Product} />
     </HomeStack.Navigator>
   );
 }
@@ -28,6 +31,7 @@ function CartStackScreen() {
     <CartStack.Navigator screenOptions={{ headerShown: false }}>
       <CartStack.Screen name="Cart" component={Cart} />
       <CartStack.Screen name="Results" component={Results} />
+      <CartStack.Screen name="Product" component={Product} />
     </CartStack.Navigator>
   );
 }
@@ -50,6 +54,7 @@ function SearchStackScreen() {
     <SearchStack.Navigator screenOptions={{ headerShown: false }}>
       <SearchStack.Screen name="Search" component={Search} />
       <SearchStack.Screen name="Results" component={Results} />
+      <SearchStack.Screen name="Product" component={Product} />
     </SearchStack.Navigator>
   );
 }

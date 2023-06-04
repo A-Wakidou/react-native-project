@@ -95,7 +95,7 @@ const response2 = [
     }
 ]
 
-const Home = ({ navigation, route }) => {
+const Home = ({ navigation }) => {
     function goTo(text) {
         navigation.navigate('Results', { query: text })
     }
