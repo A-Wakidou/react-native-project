@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
     }
 })
 
-const Search = () => {
-    function goTo(text) {
-        navigation.navigate('Results', { query: text })
+const Search = ({navigation}) => {
+    const goTo = (text) => {
+        navigation.navigate('SearchScreen', { screen : 'Results', params: {query: text} })
     }
     return (
         <ScrollView

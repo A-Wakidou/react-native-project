@@ -9,6 +9,11 @@ import Account from './pages/account.js'
 import Search from './pages/search.js'
 import Results from './pages/results.js'
 import Product from './pages/product.js'
+import Purchase from './pages/purchase.js';
+import {store, persistor} from './store'
+import { Provider } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
 import './assets/styles/index.css'
 
@@ -18,8 +23,6 @@ function HomeStackScreen() {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="Home" component={Home} />
-      <HomeStack.Screen name="Results" component={Results} />
-      <HomeStack.Screen name="Product" component={Product} />
     </HomeStack.Navigator>
   );
 }
@@ -30,8 +33,7 @@ function CartStackScreen() {
   return (
     <CartStack.Navigator screenOptions={{ headerShown: false }}>
       <CartStack.Screen name="Cart" component={Cart} />
-      <CartStack.Screen name="Results" component={Results} />
-      <CartStack.Screen name="Product" component={Product} />
+      <CartStack.Screen name="Purchase" component={Purchase} />
     </CartStack.Navigator>
   );
 }
@@ -42,7 +44,6 @@ function AccountStackScreen() {
   return (
     <AccountStack.Navigator screenOptions={{ headerShown: false }}>
       <AccountStack.Screen name="Account" component={Account} />
-      <AccountStack.Screen name="Results" component={Results} />
     </AccountStack.Navigator>
   );
 }
@@ -62,43 +63,55 @@ function SearchStackScreen() {
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  
+  const AppContainer = () => {
+    const cartCount = useSelector(state => state.cart.value)
+    return (
+      <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
+        <NavigationContainer>
+          <Tab.Navigator navigationOptions={{ header: null }} screenOptions={{
+            tabBarStyle: { height: 80 },
+            tabBarActiveTintColor: '#5F9EC2',
+            tabBarInactiveTintColor: 'black',
+            headerShown: false,
+            tabBarShowLabel: false,
+          }}>
+            <Tab.Screen name="HomeScreen" component={HomeStackScreen} options={{
+              // title: 'Home',
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="home" color={color} size={size} />
+              )
+            }} />
+            <Tab.Screen name="SearchScreen" component={SearchStackScreen} options={{
+              // title: 'Search',
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="store-search" color={color} size={size} />
+              )
+            }} />
+            <Tab.Screen name="CartScreen" component={CartStackScreen} options={{
+              // title: 'Cart',
+              tabBarBadge: cartCount.length > 0 ? cartCount.length : null,
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="cart" color={color} size={size} />
+              )
+            }} />
+            <Tab.Screen name="AccountScreen" component={AccountStackScreen} options={{
+              // title: 'Account',
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="account" color={color} size={size} />
+              )
+            }} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+      )
+    }
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
-      <NavigationContainer>
-        <Tab.Navigator navigationOptions={{ header: null }} screenOptions={{
-          tabBarStyle: { height: 80 },
-          tabBarActiveTintColor: '#5F9EC2',
-          tabBarInactiveTintColor: 'black',
-          headerShown: false,
-          tabBarShowLabel: false,
-        }}>
-          <Tab.Screen name="HomeScreen" component={HomeStackScreen} options={{
-            // title: 'Home',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
-            )
-          }} />
-          <Tab.Screen name="SearchScreen" component={SearchStackScreen} options={{
-            // title: 'Search',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="store-search" color={color} size={size} />
-            )
-          }} />
-          <Tab.Screen name="CartScreen" component={CartStackScreen} options={{
-            // title: 'Cart',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="cart" color={color} size={size} />
-            )
-          }} />
-          <Tab.Screen name="AccountScreen" component={AccountStackScreen} options={{
-            // title: 'Account',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="account" color={color} size={size} />
-            )
-          }} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppContainer />
+      </PersistGate>
+    </Provider>
   );
 }

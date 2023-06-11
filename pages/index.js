@@ -96,8 +96,8 @@ const response2 = [
 ]
 
 const Home = ({ navigation }) => {
-    function goTo(text) {
-        navigation.navigate('Results', { query: text })
+    const goTo = (text) => {
+        navigation.navigate('SearchScreen', { screen : 'Results', params: {query: text} })
     }
     return (
         <ScrollView

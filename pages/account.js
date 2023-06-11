@@ -1,9 +1,9 @@
 import { Text, View } from 'react-native';
 import Header from '../components/header.js';
 
-const Account = () => {
-    function goTo(text) {
-        navigation.navigate('Results', { query: text })
+const Account = ({navigation}) => {
+    const goTo = (text) => {
+        navigation.navigate('SearchScreen', { screen : 'Results', params: {query: text} })
     }
     return (
         <View

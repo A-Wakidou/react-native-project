@@ -6,8 +6,8 @@ import Header from '../components/header.js';
 
 const Results = (props) => {
   const [data, setData] = useState([])
-  function goTo(text) {
-    props.navigation.navigate('Results', { query: text })
+  const goTo = (text) => {
+    props.navigation.navigate('SearchScreen', { screen : 'Results', params: {query: text} })
   }
 
   useEffect( () => {
@@ -30,30 +30,34 @@ const Results = (props) => {
       <FlatList style={{flex:1}} data={data} keyExtractor={data => data.id} renderItem={({item, index, separators}) => (
         <TouchableHighlight
           key={item.id}
-          onPress={() => props.navigation.navigate('Product', {id: item.id})}
+          onPress={() => props.navigation.navigate('Product', {item})}
           onShowUnderlay={separators.highlight}
           onHideUnderlay={separators.unhighlight}>
           <View style={{padding: '1rem', flex:1, flexDirection: 'row'}}>
             <Image style={{width: '35%', height: 100, marginRight:10}} resizeMode="contain" source={item.images[0].url} />
             <View style={{flex:1, flexDirection: 'column', justifyContent: 'center'}}>
-            <Text style={{fontSize: '1.1rem', fontWeight: 'bold'}}>{item.title}</Text>
-              { item.ratings.length > 0 ? item.ratings.reduce( (accumulator, currentValue) =>
-                <View style={{flexDirection:'row', alignItems:'center'}}>
-                  { (accumulator.rating + currentValue.rating) / item.ratings.length > 1 ? <Image style={{width: 10, height: 10}} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{width: 10, height: 10}} source={require('../assets/images/star.svg')} /> } 
-                  { (accumulator.rating + currentValue.rating) / item.ratings.length > 2 ? <Image style={{width: 10, height: 10}} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{width: 10, height: 10}} source={require('../assets/images/star.svg')} /> } 
-                  { (accumulator.rating + currentValue.rating) / item.ratings.length > 3 ? <Image style={{width: 10, height: 10}} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{width: 10, height: 10}} source={require('../assets/images/star.svg')} /> } 
-                  { (accumulator.rating + currentValue.rating) / item.ratings.length > 4 ? <Image style={{width: 10, height: 10}} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{width: 10, height: 10}} source={require('../assets/images/star.svg')} /> } 
-                  { (accumulator.rating + currentValue.rating) / item.ratings.length > 5 ? <Image style={{width: 10, height: 10, marginRight: 5}} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{width: 10, height: 10}} source={require('../assets/images/star.svg')} /> } 
-                  <Text style={{fontSize:'0.65rem'}}>{(accumulator.rating + currentValue.rating) / item.ratings.length + '/5'}</Text>
-                </View>
-              ) : <Text style={{fontSize:'0.65rem', fontStyle: 'italic'}}>Soyez le premier à donner votre avis</Text>}
-              <Text style={{fontSize: '1.2rem', fontWeight: 'bold'}}>{item.price}€</Text>
-              <Text>{item.rating}</Text>
-            </View>
+            <Text style={{fontSize: '1.1rem', fontWeight: 'bold'}} numberOfLines={1}>{item.title}</Text>
+            { item.ratings.length > 0 ? item.ratings.reduce( (accumulator, currentValue) =>
+              <View style={{flexDirection:'row', alignItems:'center'}}>
+                { (accumulator.rating + currentValue.rating) / item.ratings.length > 1 ? <Image style={{width: 10, height: 10}} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{width: 10, height: 10}} source={require('../assets/images/star.svg')} /> } 
+                { (accumulator.rating + currentValue.rating) / item.ratings.length > 2 ? <Image style={{width: 10, height: 10}} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{width: 10, height: 10}} source={require('../assets/images/star.svg')} /> } 
+                { (accumulator.rating + currentValue.rating) / item.ratings.length > 3 ? <Image style={{width: 10, height: 10}} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{width: 10, height: 10}} source={require('../assets/images/star.svg')} /> } 
+                { (accumulator.rating + currentValue.rating) / item.ratings.length > 4 ? <Image style={{width: 10, height: 10}} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{width: 10, height: 10}} source={require('../assets/images/star.svg')} /> } 
+                { (accumulator.rating + currentValue.rating) / item.ratings.length > 5 ? <Image style={{width: 10, height: 10}} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{width: 10, height: 10}} source={require('../assets/images/star.svg')} /> } 
+                <Text style={{fontSize:'0.65rem', marginLeft: 5}}>{(accumulator.rating + currentValue.rating) / item.ratings.length + '/5'}</Text>
+              </View>
+              ) : <Text style={{fontSize:'0.65rem', fontStyle: 'italic'}}>Soyez le premier à noter le produit</Text>
+            }
+            {
+              item.comments.length > 0 ? <Text style={{fontSize:'0.65rem', fontStyle: 'italic'}}> {item.comments.length} commentaires </Text> : <Text style={{fontSize:'0.65rem', fontStyle: 'italic'}}> 0 commentaires </Text>
+            }
+            <Text style={{fontSize: '1.2rem', fontWeight: 'bold'}}>{item.price}€</Text>
+            <Text>{item.rating}</Text>
           </View>
-        </TouchableHighlight>
-      )} />
-    </ScrollView>
+        </View>
+      </TouchableHighlight>
+    )} />
+  </ScrollView>
   );
 };
 
