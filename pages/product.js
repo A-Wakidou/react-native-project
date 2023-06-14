@@ -3,7 +3,8 @@ import { useState } from 'react'
 import Header from '../components/header.js';
 import ImagesCarouselBoutons from '../components/imagesCarouselBoutons.js';
 import { useDispatch } from 'react-redux'
-import { addToCart } from '../features/cartSlice.js';
+import { addToCart, resetCart, resetCartError } from '../features/cartSlice.js';
+import { useSelector } from 'react-redux'
 
 const styles = StyleSheet.create({
     centeredView: {
@@ -47,7 +48,8 @@ const styles = StyleSheet.create({
 })
 
 const Product = (props) => {
-    const [selectedValue, setSelectedValue] = useState(1);
+    const cart = useSelector(state => state.cart)
+    const [selectedValue, setSelectedValue] = useState(1)
     const [modalVisible, setModalVisible] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
     const dispatch = useDispatch()
@@ -59,9 +61,19 @@ const Product = (props) => {
         props.navigation.navigate('CartScreen', { screen: 'Cart' })
     }
     const addProductToCart = () => {
-        dispatch(addToCart(props.route.params.item))
-        setModalMessage('Ajouté au panier !')
-        setModalVisible(true)
+        dispatch(addToCart({item:props.route.params.item, amount:selectedValue}))
+        console.log(cart.error);
+        // if(!cart.error) {
+        //     setModalMessage('Ajouté au panier !')
+        //     setModalVisible(true)
+        // }
+    }
+    const createPickerItems = () => {
+        let items = []
+        for(var i=1; i <= props.route.params.item.stock; i++) {
+            items.push(<Picker.Item label={i} value={i} key={i} />)
+        }
+        return items
     }
     return (
     <ScrollView
@@ -77,7 +89,19 @@ const Product = (props) => {
             <View style={styles.modalView}>
                 <Text style={styles.modalText}>{modalMessage}</Text>
                 <Button title='Votre Panier' onPress={() => goToCart()} style={{marginBottom: '0.5rem'}} />
-                <Button title='Cotinuer vos achats' onPress={() => setModalVisible(false)} />
+                <Button title='Continuer vos achats' onPress={() => setModalVisible(false)} />
+                <Button title='reset' onPress={() => dispatch(resetCart())} />
+            </View>
+            </View>
+        </Modal>
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={cart.error}>
+            <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+                <Text style={styles.modalText}>Nous sommes désolés, le stock pour ce produit a atteint son maximum, réessayez plus tard.</Text>
+                <Button title='Fermer' onPress={() => dispatch(resetCartError())} />
             </View>
             </View>
         </Modal>
@@ -115,10 +139,9 @@ const Product = (props) => {
                         <Picker
                             selectedValue={selectedValue}
                             style={{ height: 35, width: 40 }}
-                            onValueChange={(itemValue) => setSelectedValue(itemValue)}
+                            onValueChange={(itemValue) => setSelectedValue(parseInt(itemValue))}
                         >
-                            <Picker.Item label="2" value="2" />
-                            <Picker.Item label="3" value="3" />
+                            {createPickerItems()}
                         </Picker>
                     </View>
                     <Button onPress={addProductToCart} title="Ajouter au panier" color="#2D2D2D" />
