@@ -22,6 +22,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { CheckToken } from '../dto';
+// @ts-ignore
 import { LoginDto } from '../dto';
 /**
  * AuthApi - axios parameter creator
@@ -31,10 +33,13 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * 
+         * @param {CheckToken} checkToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerCheckToken: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        authControllerCheckToken: async (checkToken: CheckToken, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'checkToken' is not null or undefined
+            assertParamExists('authControllerCheckToken', 'checkToken', checkToken)
             const localVarPath = `/auth/check`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -49,9 +54,12 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(checkToken, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -105,11 +113,12 @@ export const AuthApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {CheckToken} checkToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerCheckToken(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerCheckToken(options);
+        async authControllerCheckToken(checkToken: CheckToken, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerCheckToken(checkToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -134,11 +143,12 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
     return {
         /**
          * 
+         * @param {CheckToken} checkToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerCheckToken(options?: any): AxiosPromise<void> {
-            return localVarFp.authControllerCheckToken(options).then((request) => request(axios, basePath));
+        authControllerCheckToken(checkToken: CheckToken, options?: any): AxiosPromise<void> {
+            return localVarFp.authControllerCheckToken(checkToken, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -161,12 +171,13 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
 export class AuthApi extends BaseAPI {
     /**
      * 
+     * @param {CheckToken} checkToken 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public authControllerCheckToken(options?: AxiosRequestConfig) {
-        return AuthApiFp(this.configuration).authControllerCheckToken(options).then((request) => request(this.axios, this.basePath));
+    public authControllerCheckToken(checkToken: CheckToken, options?: AxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authControllerCheckToken(checkToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

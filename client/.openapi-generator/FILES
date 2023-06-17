@@ -15,6 +15,7 @@ api/users-api.ts
 base.ts
 common.ts
 configuration.ts
+dto/check-token.ts
 dto/create-category-dto.ts
 dto/create-comment-dto.ts
 dto/create-order-dto.ts

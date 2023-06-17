@@ -1,3 +1,4 @@
+export * from './check-token';
 export * from './create-category-dto';
 export * from './create-comment-dto';
 export * from './create-order-dto';
