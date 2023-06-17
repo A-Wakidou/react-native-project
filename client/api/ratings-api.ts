@@ -22,25 +22,26 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { CreateUserDto } from '../dto';
+import { CreateRatingDto } from '../dto';
 // @ts-ignore
-import { UpdateUserDto } from '../dto';
+import { UpdateRatingDto } from '../dto';
 /**
- * UsersApi - axios parameter creator
+ * RatingsApi - axios parameter creator
  * @export
  */
-export const UsersApiAxiosParamCreator = function (configuration?: Configuration) {
+export const RatingsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {CreateUserDto} createUserDto 
+         * @param {CreateRatingDto} createRatingDto 
+         * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerCreate: async (createUserDto: CreateUserDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createUserDto' is not null or undefined
-            assertParamExists('usersControllerCreate', 'createUserDto', createUserDto)
-            const localVarPath = `/users`;
+        ratingsControllerCreate: async (createRatingDto: CreateRatingDto, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createRatingDto' is not null or undefined
+            assertParamExists('ratingsControllerCreate', 'createRatingDto', createRatingDto)
+            const localVarPath = `/ratings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -52,6 +53,10 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (authorization != null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -59,7 +64,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createUserDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createRatingDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -72,8 +77,8 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerFindAll: async (authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/users`;
+        ratingsControllerFindAll: async (authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/ratings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -103,14 +108,13 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {number} id 
-         * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerFindOne: async (id: number, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        ratingsControllerFindOne: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('usersControllerFindOne', 'id', id)
-            const localVarPath = `/users/{id}`
+            assertParamExists('ratingsControllerFindOne', 'id', id)
+            const localVarPath = `/ratings/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -123,10 +127,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authorization != null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -145,10 +145,10 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerRemove: async (id: number, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        ratingsControllerRemove: async (id: number, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('usersControllerRemove', 'id', id)
-            const localVarPath = `/users/{id}`
+            assertParamExists('ratingsControllerRemove', 'id', id)
+            const localVarPath = `/ratings/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -179,17 +179,17 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {number} id 
-         * @param {UpdateUserDto} updateUserDto 
+         * @param {UpdateRatingDto} updateRatingDto 
          * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerUpdate: async (id: number, updateUserDto: UpdateUserDto, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        ratingsControllerUpdate: async (id: number, updateRatingDto: UpdateRatingDto, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('usersControllerUpdate', 'id', id)
-            // verify required parameter 'updateUserDto' is not null or undefined
-            assertParamExists('usersControllerUpdate', 'updateUserDto', updateUserDto)
-            const localVarPath = `/users/{id}`
+            assertParamExists('ratingsControllerUpdate', 'id', id)
+            // verify required parameter 'updateRatingDto' is not null or undefined
+            assertParamExists('ratingsControllerUpdate', 'updateRatingDto', updateRatingDto)
+            const localVarPath = `/ratings/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -213,7 +213,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateUserDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(updateRatingDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -224,20 +224,21 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
 };
 
 /**
- * UsersApi - functional programming interface
+ * RatingsApi - functional programming interface
  * @export
  */
-export const UsersApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = UsersApiAxiosParamCreator(configuration)
+export const RatingsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RatingsApiAxiosParamCreator(configuration)
     return {
         /**
          * 
-         * @param {CreateUserDto} createUserDto 
+         * @param {CreateRatingDto} createRatingDto 
+         * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersControllerCreate(createUserDto: CreateUserDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerCreate(createUserDto, options);
+        async ratingsControllerCreate(createRatingDto: CreateRatingDto, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.ratingsControllerCreate(createRatingDto, authorization, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -246,8 +247,18 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersControllerFindAll(authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerFindAll(authorization, options);
+        async ratingsControllerFindAll(authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.ratingsControllerFindAll(authorization, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async ratingsControllerFindOne(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.ratingsControllerFindOne(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -257,51 +268,41 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersControllerFindOne(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerFindOne(id, authorization, options);
+        async ratingsControllerRemove(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.ratingsControllerRemove(id, authorization, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
+         * @param {UpdateRatingDto} updateRatingDto 
          * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersControllerRemove(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerRemove(id, authorization, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UpdateUserDto} updateUserDto 
-         * @param {string} [authorization] JWT Token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usersControllerUpdate(id: number, updateUserDto: UpdateUserDto, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerUpdate(id, updateUserDto, authorization, options);
+        async ratingsControllerUpdate(id: number, updateRatingDto: UpdateRatingDto, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.ratingsControllerUpdate(id, updateRatingDto, authorization, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * UsersApi - factory interface
+ * RatingsApi - factory interface
  * @export
  */
-export const UsersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = UsersApiFp(configuration)
+export const RatingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RatingsApiFp(configuration)
     return {
         /**
          * 
-         * @param {CreateUserDto} createUserDto 
+         * @param {CreateRatingDto} createRatingDto 
+         * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerCreate(createUserDto: CreateUserDto, options?: any): AxiosPromise<void> {
-            return localVarFp.usersControllerCreate(createUserDto, options).then((request) => request(axios, basePath));
+        ratingsControllerCreate(createRatingDto: CreateRatingDto, authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.ratingsControllerCreate(createRatingDto, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -309,8 +310,17 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerFindAll(authorization?: string, options?: any): AxiosPromise<void> {
-            return localVarFp.usersControllerFindAll(authorization, options).then((request) => request(axios, basePath));
+        ratingsControllerFindAll(authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.ratingsControllerFindAll(authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ratingsControllerFindOne(id: number, options?: any): AxiosPromise<void> {
+            return localVarFp.ratingsControllerFindOne(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -319,49 +329,40 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerFindOne(id: number, authorization?: string, options?: any): AxiosPromise<void> {
-            return localVarFp.usersControllerFindOne(id, authorization, options).then((request) => request(axios, basePath));
+        ratingsControllerRemove(id: number, authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.ratingsControllerRemove(id, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
+         * @param {UpdateRatingDto} updateRatingDto 
          * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerRemove(id: number, authorization?: string, options?: any): AxiosPromise<void> {
-            return localVarFp.usersControllerRemove(id, authorization, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UpdateUserDto} updateUserDto 
-         * @param {string} [authorization] JWT Token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usersControllerUpdate(id: number, updateUserDto: UpdateUserDto, authorization?: string, options?: any): AxiosPromise<void> {
-            return localVarFp.usersControllerUpdate(id, updateUserDto, authorization, options).then((request) => request(axios, basePath));
+        ratingsControllerUpdate(id: number, updateRatingDto: UpdateRatingDto, authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.ratingsControllerUpdate(id, updateRatingDto, authorization, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * UsersApi - object-oriented interface
+ * RatingsApi - object-oriented interface
  * @export
- * @class UsersApi
+ * @class RatingsApi
  * @extends {BaseAPI}
  */
-export class UsersApi extends BaseAPI {
+export class RatingsApi extends BaseAPI {
     /**
      * 
-     * @param {CreateUserDto} createUserDto 
+     * @param {CreateRatingDto} createRatingDto 
+     * @param {string} [authorization] JWT Token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
+     * @memberof RatingsApi
      */
-    public usersControllerCreate(createUserDto: CreateUserDto, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerCreate(createUserDto, options).then((request) => request(this.axios, this.basePath));
+    public ratingsControllerCreate(createRatingDto: CreateRatingDto, authorization?: string, options?: AxiosRequestConfig) {
+        return RatingsApiFp(this.configuration).ratingsControllerCreate(createRatingDto, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -369,10 +370,21 @@ export class UsersApi extends BaseAPI {
      * @param {string} [authorization] JWT Token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
+     * @memberof RatingsApi
      */
-    public usersControllerFindAll(authorization?: string, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerFindAll(authorization, options).then((request) => request(this.axios, this.basePath));
+    public ratingsControllerFindAll(authorization?: string, options?: AxiosRequestConfig) {
+        return RatingsApiFp(this.configuration).ratingsControllerFindAll(authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RatingsApi
+     */
+    public ratingsControllerFindOne(id: number, options?: AxiosRequestConfig) {
+        return RatingsApiFp(this.configuration).ratingsControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -381,34 +393,22 @@ export class UsersApi extends BaseAPI {
      * @param {string} [authorization] JWT Token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
+     * @memberof RatingsApi
      */
-    public usersControllerFindOne(id: number, authorization?: string, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerFindOne(id, authorization, options).then((request) => request(this.axios, this.basePath));
+    public ratingsControllerRemove(id: number, authorization?: string, options?: AxiosRequestConfig) {
+        return RatingsApiFp(this.configuration).ratingsControllerRemove(id, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
+     * @param {UpdateRatingDto} updateRatingDto 
      * @param {string} [authorization] JWT Token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
+     * @memberof RatingsApi
      */
-    public usersControllerRemove(id: number, authorization?: string, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerRemove(id, authorization, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {UpdateUserDto} updateUserDto 
-     * @param {string} [authorization] JWT Token
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsersApi
-     */
-    public usersControllerUpdate(id: number, updateUserDto: UpdateUserDto, authorization?: string, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerUpdate(id, updateUserDto, authorization, options).then((request) => request(this.axios, this.basePath));
+    public ratingsControllerUpdate(id: number, updateRatingDto: UpdateRatingDto, authorization?: string, options?: AxiosRequestConfig) {
+        return RatingsApiFp(this.configuration).ratingsControllerUpdate(id, updateRatingDto, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 }

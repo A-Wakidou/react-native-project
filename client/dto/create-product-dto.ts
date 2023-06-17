@@ -46,6 +46,12 @@ export interface CreateProductDto {
     'brand'?: string;
     /**
      * 
+     * @type {number}
+     * @memberof CreateProductDto
+     */
+    'rating'?: number;
+    /**
+     * 
      * @type {Array<string>}
      * @memberof CreateProductDto
      */

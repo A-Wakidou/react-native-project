@@ -22,25 +22,26 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { CreateUserDto } from '../dto';
+import { CreateCommentDto } from '../dto';
 // @ts-ignore
-import { UpdateUserDto } from '../dto';
+import { UpdateCommentDto } from '../dto';
 /**
- * UsersApi - axios parameter creator
+ * CommentsApi - axios parameter creator
  * @export
  */
-export const UsersApiAxiosParamCreator = function (configuration?: Configuration) {
+export const CommentsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {CreateUserDto} createUserDto 
+         * @param {CreateCommentDto} createCommentDto 
+         * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerCreate: async (createUserDto: CreateUserDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createUserDto' is not null or undefined
-            assertParamExists('usersControllerCreate', 'createUserDto', createUserDto)
-            const localVarPath = `/users`;
+        commentsControllerCreate: async (createCommentDto: CreateCommentDto, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createCommentDto' is not null or undefined
+            assertParamExists('commentsControllerCreate', 'createCommentDto', createCommentDto)
+            const localVarPath = `/comments`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -52,6 +53,10 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (authorization != null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -59,7 +64,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createUserDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createCommentDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -72,8 +77,8 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerFindAll: async (authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/users`;
+        commentsControllerFindAll: async (authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/comments`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -103,14 +108,13 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {number} id 
-         * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerFindOne: async (id: number, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        commentsControllerFindOne: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('usersControllerFindOne', 'id', id)
-            const localVarPath = `/users/{id}`
+            assertParamExists('commentsControllerFindOne', 'id', id)
+            const localVarPath = `/comments/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -123,10 +127,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authorization != null) {
-                localVarHeaderParameter['Authorization'] = String(authorization);
-            }
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -145,10 +145,10 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerRemove: async (id: number, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        commentsControllerRemove: async (id: number, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('usersControllerRemove', 'id', id)
-            const localVarPath = `/users/{id}`
+            assertParamExists('commentsControllerRemove', 'id', id)
+            const localVarPath = `/comments/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -179,17 +179,17 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {number} id 
-         * @param {UpdateUserDto} updateUserDto 
+         * @param {UpdateCommentDto} updateCommentDto 
          * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerUpdate: async (id: number, updateUserDto: UpdateUserDto, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        commentsControllerUpdate: async (id: number, updateCommentDto: UpdateCommentDto, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('usersControllerUpdate', 'id', id)
-            // verify required parameter 'updateUserDto' is not null or undefined
-            assertParamExists('usersControllerUpdate', 'updateUserDto', updateUserDto)
-            const localVarPath = `/users/{id}`
+            assertParamExists('commentsControllerUpdate', 'id', id)
+            // verify required parameter 'updateCommentDto' is not null or undefined
+            assertParamExists('commentsControllerUpdate', 'updateCommentDto', updateCommentDto)
+            const localVarPath = `/comments/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -213,7 +213,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateUserDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(updateCommentDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -224,20 +224,21 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
 };
 
 /**
- * UsersApi - functional programming interface
+ * CommentsApi - functional programming interface
  * @export
  */
-export const UsersApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = UsersApiAxiosParamCreator(configuration)
+export const CommentsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CommentsApiAxiosParamCreator(configuration)
     return {
         /**
          * 
-         * @param {CreateUserDto} createUserDto 
+         * @param {CreateCommentDto} createCommentDto 
+         * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersControllerCreate(createUserDto: CreateUserDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerCreate(createUserDto, options);
+        async commentsControllerCreate(createCommentDto: CreateCommentDto, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.commentsControllerCreate(createCommentDto, authorization, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -246,8 +247,18 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersControllerFindAll(authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerFindAll(authorization, options);
+        async commentsControllerFindAll(authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.commentsControllerFindAll(authorization, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async commentsControllerFindOne(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.commentsControllerFindOne(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -257,51 +268,41 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersControllerFindOne(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerFindOne(id, authorization, options);
+        async commentsControllerRemove(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.commentsControllerRemove(id, authorization, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
+         * @param {UpdateCommentDto} updateCommentDto 
          * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersControllerRemove(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerRemove(id, authorization, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UpdateUserDto} updateUserDto 
-         * @param {string} [authorization] JWT Token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async usersControllerUpdate(id: number, updateUserDto: UpdateUserDto, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersControllerUpdate(id, updateUserDto, authorization, options);
+        async commentsControllerUpdate(id: number, updateCommentDto: UpdateCommentDto, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.commentsControllerUpdate(id, updateCommentDto, authorization, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * UsersApi - factory interface
+ * CommentsApi - factory interface
  * @export
  */
-export const UsersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = UsersApiFp(configuration)
+export const CommentsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CommentsApiFp(configuration)
     return {
         /**
          * 
-         * @param {CreateUserDto} createUserDto 
+         * @param {CreateCommentDto} createCommentDto 
+         * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerCreate(createUserDto: CreateUserDto, options?: any): AxiosPromise<void> {
-            return localVarFp.usersControllerCreate(createUserDto, options).then((request) => request(axios, basePath));
+        commentsControllerCreate(createCommentDto: CreateCommentDto, authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.commentsControllerCreate(createCommentDto, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -309,8 +310,17 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerFindAll(authorization?: string, options?: any): AxiosPromise<void> {
-            return localVarFp.usersControllerFindAll(authorization, options).then((request) => request(axios, basePath));
+        commentsControllerFindAll(authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.commentsControllerFindAll(authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        commentsControllerFindOne(id: number, options?: any): AxiosPromise<void> {
+            return localVarFp.commentsControllerFindOne(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -319,49 +329,40 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerFindOne(id: number, authorization?: string, options?: any): AxiosPromise<void> {
-            return localVarFp.usersControllerFindOne(id, authorization, options).then((request) => request(axios, basePath));
+        commentsControllerRemove(id: number, authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.commentsControllerRemove(id, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
+         * @param {UpdateCommentDto} updateCommentDto 
          * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerRemove(id: number, authorization?: string, options?: any): AxiosPromise<void> {
-            return localVarFp.usersControllerRemove(id, authorization, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {UpdateUserDto} updateUserDto 
-         * @param {string} [authorization] JWT Token
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        usersControllerUpdate(id: number, updateUserDto: UpdateUserDto, authorization?: string, options?: any): AxiosPromise<void> {
-            return localVarFp.usersControllerUpdate(id, updateUserDto, authorization, options).then((request) => request(axios, basePath));
+        commentsControllerUpdate(id: number, updateCommentDto: UpdateCommentDto, authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.commentsControllerUpdate(id, updateCommentDto, authorization, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * UsersApi - object-oriented interface
+ * CommentsApi - object-oriented interface
  * @export
- * @class UsersApi
+ * @class CommentsApi
  * @extends {BaseAPI}
  */
-export class UsersApi extends BaseAPI {
+export class CommentsApi extends BaseAPI {
     /**
      * 
-     * @param {CreateUserDto} createUserDto 
+     * @param {CreateCommentDto} createCommentDto 
+     * @param {string} [authorization] JWT Token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
+     * @memberof CommentsApi
      */
-    public usersControllerCreate(createUserDto: CreateUserDto, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerCreate(createUserDto, options).then((request) => request(this.axios, this.basePath));
+    public commentsControllerCreate(createCommentDto: CreateCommentDto, authorization?: string, options?: AxiosRequestConfig) {
+        return CommentsApiFp(this.configuration).commentsControllerCreate(createCommentDto, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -369,10 +370,21 @@ export class UsersApi extends BaseAPI {
      * @param {string} [authorization] JWT Token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
+     * @memberof CommentsApi
      */
-    public usersControllerFindAll(authorization?: string, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerFindAll(authorization, options).then((request) => request(this.axios, this.basePath));
+    public commentsControllerFindAll(authorization?: string, options?: AxiosRequestConfig) {
+        return CommentsApiFp(this.configuration).commentsControllerFindAll(authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommentsApi
+     */
+    public commentsControllerFindOne(id: number, options?: AxiosRequestConfig) {
+        return CommentsApiFp(this.configuration).commentsControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -381,34 +393,22 @@ export class UsersApi extends BaseAPI {
      * @param {string} [authorization] JWT Token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
+     * @memberof CommentsApi
      */
-    public usersControllerFindOne(id: number, authorization?: string, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerFindOne(id, authorization, options).then((request) => request(this.axios, this.basePath));
+    public commentsControllerRemove(id: number, authorization?: string, options?: AxiosRequestConfig) {
+        return CommentsApiFp(this.configuration).commentsControllerRemove(id, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
+     * @param {UpdateCommentDto} updateCommentDto 
      * @param {string} [authorization] JWT Token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsersApi
+     * @memberof CommentsApi
      */
-    public usersControllerRemove(id: number, authorization?: string, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerRemove(id, authorization, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {UpdateUserDto} updateUserDto 
-     * @param {string} [authorization] JWT Token
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsersApi
-     */
-    public usersControllerUpdate(id: number, updateUserDto: UpdateUserDto, authorization?: string, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersControllerUpdate(id, updateUserDto, authorization, options).then((request) => request(this.axios, this.basePath));
+    public commentsControllerUpdate(id: number, updateCommentDto: UpdateCommentDto, authorization?: string, options?: AxiosRequestConfig) {
+        return CommentsApiFp(this.configuration).commentsControllerUpdate(id, updateCommentDto, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 }

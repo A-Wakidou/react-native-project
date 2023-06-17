@@ -46,6 +46,12 @@ export interface UpdateProductDto {
     'brand'?: string;
     /**
      * 
+     * @type {number}
+     * @memberof UpdateProductDto
+     */
+    'rating'?: number;
+    /**
+     * 
      * @type {Array<string>}
      * @memberof UpdateProductDto
      */
