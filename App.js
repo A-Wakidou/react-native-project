@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './pages/index.js'
 import Cart from './pages/cart.js'
 import Account from './pages/account.js'
+import Login from './pages/login.js';
 import Search from './pages/search.js'
 import Results from './pages/results.js'
 import Product from './pages/product.js'
@@ -17,55 +18,56 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import './assets/styles/index.css'
 
-const HomeStack = createNativeStackNavigator();
-
-function HomeStackScreen() {
-  return (
-    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
-      <HomeStack.Screen name="Home" component={Home} />
-    </HomeStack.Navigator>
-  );
-}
-
-const CartStack = createNativeStackNavigator();
-
-function CartStackScreen() {
-  return (
-    <CartStack.Navigator screenOptions={{ headerShown: false }}>
-      <CartStack.Screen name="Cart" component={Cart} />
-      <CartStack.Screen name="Purchase" component={Purchase} />
-    </CartStack.Navigator>
-  );
-}
-
-const AccountStack = createNativeStackNavigator();
-
-function AccountStackScreen() {
-  return (
-    <AccountStack.Navigator screenOptions={{ headerShown: false }}>
-      <AccountStack.Screen name="Account" component={Account} />
-    </AccountStack.Navigator>
-  );
-}
-
-const SearchStack = createNativeStackNavigator();
-
-function SearchStackScreen() {
-  return (
-    <SearchStack.Navigator screenOptions={{ headerShown: false }}>
-      <SearchStack.Screen name="Search" component={Search} />
-      <SearchStack.Screen name="Results" component={Results} />
-      <SearchStack.Screen name="Product" component={Product} />
-    </SearchStack.Navigator>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-
 export default function App() {
-  
   const AppContainer = () => {
     const cartCount = useSelector(state => state.cart.value)
+    const user = useSelector(state => state.user)
+    const HomeStack = createNativeStackNavigator();
+    
+    function HomeStackScreen() {
+      return (
+        <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+          <HomeStack.Screen name="Home" component={Home} />
+        </HomeStack.Navigator>
+      );
+    }
+    
+    const CartStack = createNativeStackNavigator();
+    
+    function CartStackScreen() {
+      return (
+        <CartStack.Navigator screenOptions={{ headerShown: false }}>
+          <CartStack.Screen name="Cart" component={Cart} />
+          <CartStack.Screen name="Purchase" component={Purchase} />
+        </CartStack.Navigator>
+      );
+    }
+    
+    const AccountStack = createNativeStackNavigator();
+    
+    function AccountStackScreen() {
+      return (
+        <AccountStack.Navigator screenOptions={{ headerShown: false }}>
+          <AccountStack.Screen name="Login" component={Login} />
+          <AccountStack.Screen name="Account" component={Account} />
+        </AccountStack.Navigator>
+      );
+    }
+    
+    const SearchStack = createNativeStackNavigator();
+    
+    function SearchStackScreen() {
+      return (
+        <SearchStack.Navigator screenOptions={{ headerShown: false }}>
+          <SearchStack.Screen name="Search" component={Search} />
+          <SearchStack.Screen name="Results" component={Results} />
+          <SearchStack.Screen name="Product" component={Product} />
+        </SearchStack.Navigator>
+      );
+    }
+    
+    const Tab = createBottomTabNavigator();
+    
     return (
       <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
         <NavigationContainer>

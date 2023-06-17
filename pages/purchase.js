@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Text, View, ScrollView, TextInput, Picker, Button, FlatList, Image } from 'react-native';
 import Header from '../components/header.js';
 import { useSelector } from 'react-redux'
+import { StripeApi } from '../client/api.ts';
+import { Configuration } from '../client/configuration.ts';
 
 const Purchase = ({navigation}) => {
     const cart = useSelector(state => state.cart)
@@ -25,6 +27,9 @@ const Purchase = ({navigation}) => {
         let yyyy = today.getFullYear();
 
         return dd + '/' + mm + '/' + yyyy;
+    }
+    const stripeCheckout = () => {
+        new StripeApi(Configuration, 'http://localhost:3000').stripeControllerCheckout({data: cart.value})
     }
     return (
         <ScrollView
@@ -150,6 +155,7 @@ const Purchase = ({navigation}) => {
                             <Text style={{color:'white'}}>{formStep1.name} {formStep1.firstname}</Text>
                             <Text style={{color:'white'}}>{formStep1.address}</Text>
                             <Text style={{color:'white', fontStyle:'italic'}}>Date de livraison estimée : {getDeliveryDate()}</Text>
+                            <Button title='Passer au paiement' onPress={() => stripeCheckout()} />
                         </View>
                     </View>
                 )}
