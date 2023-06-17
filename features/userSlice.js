@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { AuthApi } from '../client'
+import { Configuration } from '../client'
 
 export const userSlice = createSlice({
     name: 'User',
@@ -9,8 +11,15 @@ export const userSlice = createSlice({
         token: null
     },
     reducers: {
-        checkToken: (state) => {
-            //generate request for check token
+        checkToken: (state, action) => {
+            console.log(action.payload)
+            new AuthApi(Configuration, 'http://localhost:3000').authControllerCheckToken({token: action.payload})
+                .then( (res) => {
+                    console.log(res);
+                })
+                .catch( (err) => {
+                    console.log(err);
+                })
         },
         logIn: (state, action) => {
             console.log(action.payload)
@@ -33,7 +42,7 @@ export const userSlice = createSlice({
 
 
 
-export const { logIn, setUser, setToken, logOut } = userSlice.actions
+export const { logIn, setUser, setToken, checkToken, logOut } = userSlice.actions
 
 export default userSlice.reducer
 

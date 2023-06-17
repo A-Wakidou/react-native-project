@@ -5,6 +5,7 @@ import { AuthApi } from '../client/api.ts';
 import { Configuration } from '../client/configuration.ts';
 import { logIn } from '../features/userSlice.js';
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const styles = StyleSheet.create({
     centeredView: {
@@ -41,16 +42,18 @@ const Login = ({navigation}) => {
     const [password, setPassword] = useState('')
     const [modalMessage, setModalMessage] = useState(false)
     const dispatch = useDispatch()
+    const user = useSelector(state => state)
 
     const goTo = (text) => {
         navigation.navigate('SearchScreen', { screen : 'Results', params: {query: text} })
     }
     const loginRequest = () => {
-        console.log('a')
-        new AuthApi(Configuration, 'http://localhost:3000').authControllerLogin({email: email,password: password})
+        new AuthApi(Configuration, 'http://localhost:3000').authControllerGetAccessToken({email: email,password: password})
             .then( (res) => {
-                if(res.data) dispatch(logIn({token:res.data.access_token, user:res.data.user}))
-                navigation.navigate('Account')
+                if(res.data) {
+                    dispatch(logIn({token:res.data.access_token, user:res.data.user}))
+                    navigation.navigate('Account')
+                } 
             })
             .catch( (err) => {
                 console.log(err);

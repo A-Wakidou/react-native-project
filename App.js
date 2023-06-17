@@ -15,13 +15,19 @@ import {store, persistor} from './store'
 import { Provider } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
+import { checkToken } from './features/userSlice.js';
+import { useDispatch } from 'react-redux'
 
 import './assets/styles/index.css'
 
 export default function App() {
   const AppContainer = () => {
+    const dispatch = useDispatch()
     const cartCount = useSelector(state => state.cart.value)
     const user = useSelector(state => state.user)
+    if(user.token) {
+      dispatch(checkToken(user.token))
+    }
     const HomeStack = createNativeStackNavigator();
     
     function HomeStackScreen() {
