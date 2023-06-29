@@ -1,4 +1,4 @@
-import { Text, View, Image, FlatList, ScrollView, TouchableHighlight } from 'react-native';
+import { Text, View, Image, FlatList, TouchableHighlight } from 'react-native';
 import { useEffect, useState } from 'react'
 import { ProductsApi } from '../client/api.ts';
 import { Configuration } from '../client/configuration.ts';
@@ -22,7 +22,7 @@ const Results = (props) => {
   }, [])
 
   return (
-    <ScrollView
+    <View
       style={{
         flex: 1,
       }}>
@@ -57,7 +57,7 @@ const Results = (props) => {
         </View>
       </TouchableHighlight>
     )} />
-  </ScrollView>
+  </View>
   );
 };
 

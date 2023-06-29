@@ -77,13 +77,13 @@ const Login = ({navigation}) => {
             </Modal>
             <View style={{height:600, margin: 10, marginTop:20, backgroundColor:'#2D2D2D', borderRadius:5}}>
                 <Text style={{textAlign:'center', fontWeight:'bold', fontSize:15, marginTop: 30, color:'white'}}>Connexion</Text>
-                <View style={{margin:20, padding: 10, paddingTop: 30, paddingBottom: 30, backgroundColor:'white', borderRadius:5 }}>
+                <View style={{margin:20, padding: 10, paddingTop: 30, paddingBottom: 30, backgroundColor:'white', borderRadius:5, alignItems:'center' }}>
                     <Text style={{textAlign:'center', fontWeight: 'bold', marginBottom:10}}>Email</Text>
-                    <TextInput onChangeText={(value) => setEmail(value)} style={{border:'1px solid black',color:'black', marginBottom:15, height: 30}} />
+                    <TextInput onChangeText={(value) => setEmail(value)} style={{ width: '90%', color:'black', marginBottom:15, height: 40, paddingLeft:10, fontSize:16, borderWidth: 1, borderRadius:5, borderColor:'#2d2d2d'}} />
                     <Text style={{textAlign:'center', fontWeight: 'bold', marginBottom:10}}>Mot de passe</Text>
-                    <TextInput onChangeText={(value) => setPassword(value)} secureTextEntry style={{border:'1px solid black',color:'black', height: 30, borderRadius:5, marginBottom: 20}} />
-                    <Button title='Se connecter' onPress={loginRequest} />
-                    <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', marginTop: 10, marginBottom: 10}}>
+                    <TextInput onChangeText={(value) => setPassword(value)} secureTextEntry style={{ width: '90%', color:'black', height: 40, paddingLeft:10, fontSize:16, marginBottom: 15, borderWidth: 1, borderRadius:5, borderColor:'#2d2d2d'}} />
+                    <Button title='Connexion' onPress={loginRequest} />
+                    <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', marginBottom: 10, marginTop:20}}>
                         <View style={{width:50, height:1, backgroundColor:'#2D2D2D', marginRight:15}} />
                         <Text style={{fontWeight:'bold'}}>Ou</Text>
                         <View style={{width:50, height:1, backgroundColor:'#2D2D2D', marginLeft:15}} />
