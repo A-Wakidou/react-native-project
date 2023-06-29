@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: '1rem'
+        fontSize: 15
     },
 })
 
@@ -88,7 +88,7 @@ const Product = (props) => {
             <View style={styles.centeredView}>
             <View style={styles.modalView}>
                 <Text style={styles.modalText}>{modalMessage}</Text>
-                <Button title='Votre Panier' onPress={() => goToCart()} style={{marginBottom: '0.5rem'}} />
+                <Button title='Votre Panier' onPress={() => goToCart()} style={{marginBottom: 5}} />
                 <Button title='Continuer vos achats' onPress={() => setModalVisible(false)} />
                 <Button title='reset' onPress={() => dispatch(resetCart())} />
             </View>
@@ -105,7 +105,7 @@ const Product = (props) => {
             </View>
             </View>
         </Modal>
-        <View style={{padding: '1rem',}}>
+        <View style={{padding: 15,}}>
             <View style={{flex:1, flexDirection: 'row', justifyContent: 'center'}}>
                 <Image style={{width: '80%', height: 300}} resizeMode="contain" source={props.route.params.item.images[0].url} />
                 <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
@@ -115,8 +115,8 @@ const Product = (props) => {
                 </View>
             </View>
             <ImagesCarouselBoutons />
-            <Text style={{fontSize:'1.8rem', fontWeight: 'bold'}}>{props.route.params.item.title}</Text>
-            <View style={{flexDirection:'row', marginTop:'0.5rem'}}>
+            <Text style={{fontSize:30, fontWeight: 'bold'}}>{props.route.params.item.title}</Text>
+            <View style={{flexDirection:'row', marginTop:5}}>
                 <View style={{flex:1}}>
                     { props.route.params.item.ratings.length > 0 ? props.route.params.item.ratings.reduce( (accumulator, currentValue) =>
                         <View style={{flexDirection:'row', alignItems:'center'}}>
@@ -130,12 +130,12 @@ const Product = (props) => {
                         ) : <Text style={{fontStyle: 'italic'}}>Soyez le premier à donner votre avis</Text>
                     }
                     {
-                    props.route.params.item.comments.length > 0 ? <Text style={{fontStyle: 'italic'}}> {props.route.params.item.comments.length} commentaires </Text> : <Text style={{fontSize:'0.65rem', fontStyle: 'italic'}}> 0 commentaires </Text>
+                    props.route.params.item.comments.length > 0 ? <Text style={{fontStyle: 'italic'}}> {props.route.params.item.comments.length} commentaires </Text> : <Text style={{fontSize:5, fontStyle: 'italic'}}> 0 commentaires </Text>
                     }
                 </View>
                 <View>
-                    <View style={{marginBottom: '1rem', flexDirection: 'row', justifyContent:'flex-end'}}>
-                        <Text style={{fontSize:'1.5rem', fontWeight:'bold', marginRight:5}}>{props.route.params.item.price}€</Text>
+                    <View style={{marginBottom: 15, flexDirection: 'row', justifyContent:'flex-end'}}>
+                        <Text style={{fontSize:20, fontWeight:'bold', marginRight:5}}>{props.route.params.item.price}€</Text>
                         <Picker
                             selectedValue={selectedValue}
                             style={{ height: 35, width: 40 }}
@@ -148,7 +148,7 @@ const Product = (props) => {
                 </View>
             </View>
             <View>
-                <Text style={{fontWeight:'bold', marginTop: '1rem', marginBottom:'0.5rem'}}>Description</Text>
+                <Text style={{fontWeight:'bold', marginTop: 15, marginBottom:5}}>Description</Text>
                 <Text >{props.route.params.item.description}</Text>
             </View>
         </View>

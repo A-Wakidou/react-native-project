@@ -7,6 +7,7 @@ import Home from './pages/index.js'
 import Cart from './pages/cart.js'
 import Account from './pages/account.js'
 import Login from './pages/login.js';
+import SignUp from './pages/signup.js';
 import Search from './pages/search.js'
 import Results from './pages/results.js'
 import Product from './pages/product.js'
@@ -18,16 +19,16 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { checkToken } from './features/userSlice.js';
 import { useDispatch } from 'react-redux'
 
-import './assets/styles/index.css'
-
 export default function App() {
   const AppContainer = () => {
     const dispatch = useDispatch()
     const cartCount = useSelector(state => state.cart.value)
     const user = useSelector(state => state.user)
+    
     if(user.token) {
       dispatch(checkToken(user.token))
     }
+
     const HomeStack = createNativeStackNavigator();
     
     function HomeStackScreen() {
@@ -54,8 +55,17 @@ export default function App() {
     function AccountStackScreen() {
       return (
         <AccountStack.Navigator screenOptions={{ headerShown: false }}>
-          <AccountStack.Screen name="Login" component={Login} />
-          <AccountStack.Screen name="Account" component={Account} />
+          {
+            user.isLoggedIn ? (
+              <AccountStack.Screen name="Account" component={Account} />
+            ) : 
+            (
+              <>              
+                <AccountStack.Screen name="Login" component={Login} />
+                <AccountStack.Screen name="SignUp" component={SignUp} />
+              </>
+            )
+          }
         </AccountStack.Navigator>
       );
     }

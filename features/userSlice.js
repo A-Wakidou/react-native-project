@@ -15,14 +15,18 @@ export const userSlice = createSlice({
             console.log(action.payload)
             new AuthApi(Configuration, 'http://localhost:3000').authControllerCheckToken({token: action.payload})
                 .then( (res) => {
-                    console.log(res);
+                    if(res.data == true) {
+                        return
+                    }
+                    else {
+                        logOut()
+                    }
                 })
                 .catch( (err) => {
                     console.log(err);
                 })
         },
         logIn: (state, action) => {
-            console.log(action.payload)
             state.value = action.payload.user
             state.token = action.payload.token
             state.isLoggedIn = true
@@ -36,6 +40,7 @@ export const userSlice = createSlice({
         logOut: (state) => {
             state.value = {}
             state.token = null
+            state.isLoggedIn = false
         }
     }
 })

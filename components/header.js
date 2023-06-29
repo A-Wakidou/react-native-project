@@ -22,7 +22,7 @@ const Header = (props) => {
                 alignItems: 'center'
             }}>
             <Image style={{ width: 50, height: 50 }} source={require('../assets/images/logo-blue-rounded.svg')} />
-            <TextInput onSubmitEditing={() => props.goTo(text)} onChange={handleChange} style={{ marginLeft: 10, width: '100%', fontSize: '0.8rem' }} placeholder="Rechercher" />
+            <TextInput onSubmitEditing={() => props.goTo(text)} onChange={handleChange} style={{ marginLeft: 10, width: '100%', fontSize: 15 }} placeholder="Rechercher" />
         </View>
     );
 };

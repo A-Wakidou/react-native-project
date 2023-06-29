@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     cardText: {
         color: 'white',
         marginBottom: 10,
-        fontSize: '0.7rem',
+        fontSize: 8,
         fontWeight: 'bold'
     },
     section: {
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
     },
     productsSectionTitle: {
-        fontSize: '1.5rem',
+        fontSize: 25,
         fontWeight: 'bold',
         marginBottom: 10
     },
@@ -131,7 +131,7 @@ const Home = ({ navigation }) => {
             </View>
             <View style={styles.brandSection}>
                 <Text style={styles.productsSectionTitle}>Razer</Text>
-                <View style={{ backgroundColor: '#2d2d2d', borderRadius: 5, marginBottom: '1rem' }}>
+                <View style={{ backgroundColor: '#2d2d2d', borderRadius: 5, marginBottom: 15 }}>
                     <Image source={require('../assets/images/exEquipment.svg')} resizeMode='contain' style={{ width: '100%', height: 200 }} />
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row' }}>

@@ -3,9 +3,8 @@ import Header from '../components/header.js';
 
 const styles = StyleSheet.create({
     cardTtitle: {
-        fontFamily: 'Glory, serif',
         fontWeight: 'bold',
-        marginBottom: '0.5rem'
+        marginBottom: 5
     }
 })
 
