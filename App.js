@@ -11,13 +11,12 @@ import Search from './pages/search.js'
 import Results from './pages/results.js'
 import Product from './pages/product.js'
 import Purchase from './pages/purchase.js';
-import {store, persistor} from './store'
+import { store, persistor } from './store'
 import { Provider } from 'react-redux'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { checkToken } from './features/userSlice.js';
-import { useDispatch } from 'react-redux'
-
+import { useEffect } from 'react'
 import './assets/styles/index.css'
 
 export default function App() {
@@ -25,11 +24,13 @@ export default function App() {
     const dispatch = useDispatch()
     const cartCount = useSelector(state => state.cart.value)
     const user = useSelector(state => state.user)
-    if(user.token) {
-      dispatch(checkToken(user.token))
-    }
+    useEffect(() => {
+      if (user.token) {
+        dispatch(checkToken(user.token))
+      }
+    }, [user.token])
     const HomeStack = createNativeStackNavigator();
-    
+
     function HomeStackScreen() {
       return (
         <HomeStack.Navigator screenOptions={{ headerShown: false }}>
@@ -37,9 +38,9 @@ export default function App() {
         </HomeStack.Navigator>
       );
     }
-    
+
     const CartStack = createNativeStackNavigator();
-    
+
     function CartStackScreen() {
       return (
         <CartStack.Navigator screenOptions={{ headerShown: false }}>
@@ -48,20 +49,26 @@ export default function App() {
         </CartStack.Navigator>
       );
     }
-    
+
     const AccountStack = createNativeStackNavigator();
-    
+
     function AccountStackScreen() {
-      return (
+      if (user.isLoggedIn) return (
         <AccountStack.Navigator screenOptions={{ headerShown: false }}>
-          <AccountStack.Screen name="Login" component={Login} />
           <AccountStack.Screen name="Account" component={Account} />
         </AccountStack.Navigator>
-      );
+      )
+      else {
+        return (
+          <AccountStack.Navigator screenOptions={{ headerShown: false }}>
+            <AccountStack.Screen name="Login" component={Login} />
+          </AccountStack.Navigator>
+        )
+      }
     }
-    
+
     const SearchStack = createNativeStackNavigator();
-    
+
     function SearchStackScreen() {
       return (
         <SearchStack.Navigator screenOptions={{ headerShown: false }}>
@@ -71,9 +78,9 @@ export default function App() {
         </SearchStack.Navigator>
       );
     }
-    
+
     const Tab = createBottomTabNavigator();
-    
+
     return (
       <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
         <NavigationContainer>
@@ -112,8 +119,8 @@ export default function App() {
           </Tab.Navigator>
         </NavigationContainer>
       </SafeAreaView>
-      )
-    }
+    )
+  }
 
   return (
     <Provider store={store}>

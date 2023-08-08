@@ -12,17 +12,19 @@ export const userSlice = createSlice({
     },
     reducers: {
         checkToken: (state, action) => {
-            console.log(action.payload)
-            new AuthApi(Configuration, 'http://localhost:3000').authControllerCheckToken({token: action.payload})
-                .then( (res) => {
-                    console.log(res);
+            new AuthApi(Configuration, 'http://localhost:3000').authControllerCheckToken({ token: action.payload })
+                .then((res) => {
+                    if (res.data == false) {
+                        state.isLoggedIn = false
+                        state.value = {}
+                        state.token = null
+                    }
                 })
-                .catch( (err) => {
+                .catch((err) => {
                     console.log(err);
                 })
         },
         logIn: (state, action) => {
-            console.log(action.payload)
             state.value = action.payload.user
             state.token = action.payload.token
             state.isLoggedIn = true
@@ -34,6 +36,7 @@ export const userSlice = createSlice({
             state.token = action.payload
         },
         logOut: (state) => {
+            state.isLoggedIn = false
             state.value = {}
             state.token = null
         }
