@@ -7,6 +7,7 @@ import Home from './pages/index.js'
 import Cart from './pages/cart.js'
 import Account from './pages/account.js'
 import Login from './pages/login.js';
+import SignUp from './pages/signup.js';
 import Search from './pages/search.js'
 import Results from './pages/results.js'
 import Product from './pages/product.js'
@@ -56,7 +57,7 @@ export default function App() {
       if (user.isLoggedIn) return (
         <AccountStack.Navigator screenOptions={{ headerShown: false }}>
           <AccountStack.Screen name="Account" component={Account} />
-        </AccountStack.Navigator>
+        </AccountStack.Navigator >
       )
       else {
         return (

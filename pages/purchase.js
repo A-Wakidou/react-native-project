@@ -37,20 +37,20 @@ const Purchase = ({navigation}) => {
           flex: 1,
         }}>
             <Header goTo={goTo} />
-            <Text style={{margin: '1rem', marginTop:'2rem', fontSize: '1.2rem', fontWeight:'bold'}}>Informations complémentaires</Text>
-            <View style={{margin: '1rem',  marginTop:'0.5rem', padding: '1rem', justifyContent:'center', backgroundColor:'#2D2D2D', borderRadius:5}}>
+            <Text style={{margin: 15, marginTop:'2rem', fontSize: 18, fontWeight:'bold'}}>Informations complémentaires</Text>
+            <View style={{margin: 15,  marginTop:'0.5rem', padding: 15, justifyContent:'center', backgroundColor:'#2D2D2D', borderRadius:5}}>
                 <View style={{flexDirection: 'row'}}>
                     <View style={{flex:1, alignItems:'center'}}>
-                        <Text style={{fontSize:'0.7rem', fontWeight:'bold', color: step == 1 | 2 ? '#5F9EC2' : 'white'}}>Étape 1/3</Text>
-                        <Text style={{fontSize:'0.6rem', fontWeight:'bold', fontStyle:'italic', color: step == 1 | 2 ? '#5F9EC2' : 'white'}}>Informations</Text>
+                        <Text style={{fontSize:8, fontWeight:'bold', color: step == 1 | 2 ? '#5F9EC2' : 'white'}}>Étape 1/3</Text>
+                        <Text style={{fontSize:6, fontWeight:'bold', fontStyle:'italic', color: step == 1 | 2 ? '#5F9EC2' : 'white'}}>Informations</Text>
                     </View>
                     <View style={{flex:1, alignItems:'center'}}>
-                        <Text style={{fontSize:'0.7rem', fontWeight:'bold', color: step == 2 ? '#5F9EC2' : 'white'}}>Étape 2/3</Text>
-                        <Text style={{textAlign:'center', fontWeight:'bold', fontStyle:'italic', color: step == 2 ? '#5F9EC2' : 'white', fontSize:'0.6rem'}}>Vérifications</Text>
+                        <Text style={{fontSize:7, fontWeight:'bold', color: step == 2 ? '#5F9EC2' : 'white'}}>Étape 2/3</Text>
+                        <Text style={{textAlign:'center', fontWeight:'bold', fontStyle:'italic', color: step == 2 ? '#5F9EC2' : 'white', fontSize:6}}>Vérifications</Text>
                     </View>
                     <View style={{flex:1, alignItems:'center'}}>
-                        <Text style={{fontSize:'0.7rem', fontWeight:'bold', color: step == 3 ? '#5F9EC2' : 'white'}}>Étape 3/3</Text>
-                        <Text style={{fontSize:'0.6rem', fontWeight:'bold', fontStyle:'italic', color: step == 3 ? '#5F9EC2' : 'white'}}>Paiement</Text>
+                        <Text style={{fontSize:7, fontWeight:'bold', color: step == 3 ? '#5F9EC2' : 'white'}}>Étape 3/3</Text>
+                        <Text style={{fontSize:6, fontWeight:'bold', fontStyle:'italic', color: step == 3 ? '#5F9EC2' : 'white'}}>Paiement</Text>
                     </View>
                 </View>
                 <View style={{flexDirection: 'row', marginTop:10}}>
@@ -68,14 +68,14 @@ const Purchase = ({navigation}) => {
                     <View>
                         <View style={{flexDirection: 'row', marginTop:20, gap:10}}>
                             <View style={{flex:1}}>
-                                <Text style={{color:'white', fontWeight:'bold', fontSize:'0.8rem'}}>Votre nom :</Text>
+                                <Text style={{color:'white', fontWeight:'bold', fontSize:8}}>Votre nom :</Text>
                                 <TextInput
                                     style={{height:30, marginTop:5}}
                                     onChangeText={(value) => setFormStep1(prev => ({...prev, name:value}))}
                                 />
                             </View>
                             <View style={{flex:1}}>
-                                <Text style={{color:'white', fontWeight:'bold', fontSize:'0.8rem'}}>Votre prénom :</Text>
+                                <Text style={{color:'white', fontWeight:'bold', fontSize:8}}>Votre prénom :</Text>
                                 <TextInput
                                     style={{height:30, marginTop:5}}
                                     onChangeText={(value) => setFormStep1(prev => ({...prev, firstname:value}))}
@@ -83,14 +83,14 @@ const Purchase = ({navigation}) => {
                             </View>
                         </View>
                         <View style={{marginTop:10}}>
-                            <Text style={{color:'white', fontWeight:'bold', fontSize:'0.8rem'}}>Votre email</Text>
+                            <Text style={{color:'white', fontWeight:'bold', fontSize:8}}>Votre email</Text>
                             <TextInput
                                 style={{height:30, marginTop:5}}
                                 onChangeText={(value) => setFormStep1(prev => ({...prev, email:value}))}
                             />
                         </View>
                         <View style={{marginTop:10}}>
-                            <Text style={{color:'white', fontWeight:'bold', fontSize:'0.8rem'}}>Votre addresse</Text>
+                            <Text style={{color:'white', fontWeight:'bold', fontSize:8}}>Votre addresse</Text>
                             <TextInput
                                 multiline = {true}
                                 numberOfLines = {4}
@@ -100,7 +100,7 @@ const Purchase = ({navigation}) => {
                         </View>
                         <View style={{flexDirection: 'row', marginTop: 10, marginBottom: 20, gap: 10}}>
                             <View style={{flex:1}}>
-                                <Text style={{color:'white', fontWeight:'bold', fontSize:'0.8rem'}}>Code postal :</Text>
+                                <Text style={{color:'white', fontWeight:'bold', fontSize:8}}>Code postal :</Text>
                                 <TextInput
                                     keyboardType="numeric"
                                     style={{border:'1px solid white', marginTop:5, borderRadius:5, height:30, color: 'white'}}
@@ -108,7 +108,7 @@ const Purchase = ({navigation}) => {
                                 />
                             </View>
                             <View style={{flex:1}}>
-                                <Text style={{color:'white', fontWeight:'bold', fontSize:'0.8rem', marginBottom:5}}>Ville :</Text>
+                                <Text style={{color:'white', fontWeight:'bold', fontSize:8, marginBottom:5}}>Ville :</Text>
                                 <Picker
                                     style={{height:30}}
                                     selectedValue={formStep1.city}
@@ -124,7 +124,7 @@ const Purchase = ({navigation}) => {
                 ):
                 (
                     <View style={{marginTop: 30}}>
-                        <Text style={{fontSize: '1.1rem', fontWeight:'bold', color: 'white'}}>Vos produits</Text>
+                        <Text style={{fontSize: 16, fontWeight:'bold', color: 'white'}}>Vos produits</Text>
                         <View style={{flex: 1, flexDirection:'row', gap: 10}}>
                             <View style={{flex:2}}>
                                 <FlatList data={cart.value} keyExtractor={data => data.id} renderItem={({item, index, separators}) => (
@@ -133,10 +133,10 @@ const Purchase = ({navigation}) => {
                                             <Image style={{width: '100%', height: 50}} resizeMode="contain" source={item.images[0].url} />
                                         </View>
                                         <View style={{flex:2}}>
-                                            <Text style={{fontSize: '1rem', fontWeight: 'bold', color: 'white'}} numberOfLines={1}>{item.title}</Text>
+                                            <Text style={{fontSize: 15, fontWeight: 'bold', color: 'white'}} numberOfLines={1}>{item.title}</Text>
                                             <View style={{flexDirection:'row'}}>
-                                                <Text style={{fontSize: '1rem', marginRight: 10, fontWeight: 'bold', color: 'white'}}>{item.price}€</Text>
-                                                <Text style={{fontSize: '1rem', marginRight: 10, fontWeight: 'bold', color: 'white'}}>Q :{item.quantity}</Text>
+                                                <Text style={{fontSize: 15, marginRight: 10, fontWeight: 'bold', color: 'white'}}>{item.price}€</Text>
+                                                <Text style={{fontSize: 15, marginRight: 10, fontWeight: 'bold', color: 'white'}}>Q :{item.quantity}</Text>
                                             </View>
                                         </View>
                                     </View>
@@ -151,7 +151,7 @@ const Purchase = ({navigation}) => {
                             </View>
                         </View>
                         <View>
-                            <Text style={{color:'white', fontSize:'1rem', fontWeight:'bold', marginTop:30, textDecorationLine:"underline"}}>Informations de livraison</Text>
+                            <Text style={{color:'white', fontSize:15, fontWeight:'bold', marginTop:30, textDecorationLine:"underline"}}>Informations de livraison</Text>
                             <Text style={{color:'white'}}>{formStep1.name} {formStep1.firstname}</Text>
                             <Text style={{color:'white'}}>{formStep1.address}</Text>
                             <Text style={{color:'white', fontStyle:'italic'}}>Date de livraison estimée : {getDeliveryDate()}</Text>

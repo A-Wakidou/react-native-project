@@ -10,10 +10,10 @@ const styles = StyleSheet.create({
     }
 })
 
-const ImagesCarouselBoutons = (props) => {
+const ImagesCarouselBoutons = () => {
     return (
         <View style={{
-            margin: '1rem',
+            margin: 15,
             flexDirection: 'row',
             justifyContent: 'center'
         }}>

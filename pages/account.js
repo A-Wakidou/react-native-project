@@ -15,9 +15,8 @@ const styles = StyleSheet.create({
 })
 
 const Account = ({ navigation }) => {
-    const dispatch = useDispatch()
-
     const user = useSelector(state => state.user)
+    const dispatch = useDispatch()
     const goTo = (text) => {
         navigation.navigate('SearchScreen', { screen: 'Results', params: { query: text } })
     }

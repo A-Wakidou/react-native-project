@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: '1rem'
+        fontSize: 15
     },
 })
 
