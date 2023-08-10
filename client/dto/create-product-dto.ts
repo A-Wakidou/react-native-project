@@ -25,12 +25,6 @@ export interface CreateProductDto {
      * @type {string}
      * @memberof CreateProductDto
      */
-    'stripeId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateProductDto
-     */
     'title': string;
     /**
      * 
@@ -62,6 +56,12 @@ export interface CreateProductDto {
      * @memberof CreateProductDto
      */
     'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateProductDto
+     */
+    'technicalDescription'?: string;
     /**
      * 
      * @type {number}
