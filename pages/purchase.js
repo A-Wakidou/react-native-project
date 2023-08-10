@@ -18,9 +18,6 @@ const Purchase = ({navigation}) => {
         postCode: null,
         city: ''
     })
-    const goTo = (text) => {
-        navigation.navigate('SearchScreen', { screen : 'Results', params: {query: text} })
-    }
     const getDeliveryDate = () => {
         let today = new Date();
         let dd = String(today.getDate()+3).padStart(2, '0');
@@ -42,7 +39,7 @@ const Purchase = ({navigation}) => {
         style={{
           flex: 1,
         }}>
-            <Header goTo={goTo} />
+            <Header />
             <Text style={{margin: 15, marginTop:'2rem', fontSize: 18, fontWeight:'bold'}}>Informations complémentaires</Text>
             <View style={{margin: 15,  marginTop:'0.5rem', padding: 15, justifyContent:'center', backgroundColor:'#2D2D2D', borderRadius:5}}>
                 <View style={{flexDirection: 'row'}}>

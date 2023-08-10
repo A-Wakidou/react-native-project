@@ -9,15 +9,12 @@ const styles = StyleSheet.create({
 })
 
 const Search = ({navigation}) => {
-    const goTo = (text) => {
-        navigation.navigate('SearchScreen', { screen : 'Results', params: {query: text} })
-    }
     return (
         <ScrollView
             style={{
                 flex: 1,
             }}>
-            <Header goTo={goTo} />
+            <Header />
             <View style={{ flex: 1, margin: 20 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'start' }}>
                     <TouchableHighlight onPress={() => navigation.navigate('SearchScreen', {screen: 'Results', params: {category: 1} } )} style={{ flex: 1, marginRight: 10 }}>
@@ -28,7 +25,7 @@ const Search = ({navigation}) => {
                             </View>
                         </>
                     </TouchableHighlight>
-                    <TouchableHighlight style={{ flex: 1, marginRight: 10 }}>
+                    <TouchableHighlight style={{ flex: 1, marginRight: 10 }} onPress={() => navigation.navigate('SearchScreen', {screen: 'Results', params: {category: 2} } )}>
                         <>
                             <Text style={styles.cardTtitle}>Ecrans</Text>
                             <View style={{ backgroundColor: '#2d2d2d', borderRadius: 5, padding: 10, alignItems: 'center' }}>
@@ -36,7 +33,7 @@ const Search = ({navigation}) => {
                             </View>
                         </>
                     </TouchableHighlight>
-                    <TouchableHighlight style={{ flex: 1, }}>                    
+                    <TouchableHighlight style={{ flex: 1, }} onPress={() => navigation.navigate('SearchScreen', {screen: 'Results', params: {category: 3} } )}>                    
                         <>
                             <Text style={styles.cardTtitle}>Accessoires</Text>
                             <View style={{ backgroundColor: '#2d2d2d', borderRadius: 5, padding: 10, alignItems: 'center' }}>
@@ -46,7 +43,7 @@ const Search = ({navigation}) => {
                     </TouchableHighlight>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                    <TouchableHighlight style={{ flex: 2 }}>
+                    <TouchableHighlight style={{ flex: 2 }} onPress={() => navigation.navigate('SearchScreen', {screen: 'Results', params: {category: 4} } )}>
                         <>
                             <Text style={styles.cardTtitle}>Télévisions</Text>
                             <View style={{ backgroundColor: '#2d2d2d', borderRadius: 5, padding: 10, alignItems: 'center' }}>
@@ -55,7 +52,7 @@ const Search = ({navigation}) => {
                         </>
                     </TouchableHighlight>
                     <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
-                        <TouchableHighlight  style={{ flex: 1 }}>
+                        <TouchableHighlight  style={{ flex: 1 }} onPress={() => navigation.navigate('SearchScreen', {screen: 'Results', params: {category: 5} } )}>
                             <>
                                 <Text style={styles.cardTtitle}>Processeurs</Text>
                                 <View style={{ backgroundColor: '#2d2d2d', borderRadius: 5, padding: 10, alignItems: 'center' }}>
@@ -63,7 +60,7 @@ const Search = ({navigation}) => {
                                 </View>
                             </>
                         </TouchableHighlight>
-                        <TouchableHighlight style={{ flex: 1 }}>
+                        <TouchableHighlight style={{ flex: 1 }} onPress={() => navigation.navigate('SearchScreen', {screen: 'Results', params: {category: 6} } )}>
                             <>
                                 <Text style={styles.cardTtitle}>Alimentations</Text>
                                 <View style={{ backgroundColor: '#2d2d2d', borderRadius: 5, padding: 10, alignItems: 'center' }}>

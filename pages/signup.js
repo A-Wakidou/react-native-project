@@ -58,27 +58,25 @@ const SignUp = ({navigation}) => {
         const currentDate = selectedDate;
         setShow(false);
         setDate(currentDate);
-      };
-    
-      const showMode = (currentMode) => {
+    };
+
+    const showMode = (currentMode) => {
         if (Platform.OS === 'android') {
-          setShow(false);
-          // for iOS, add a button that closes the picker
+            setShow(false);
+            // for iOS, add a button that closes the picker
         }
         setMode(currentMode);
-      };
-    
-      const showDatepicker = () => {
-        showMode('date');
-      };
-    
-      const showTimepicker = () => {
-        showMode('time');
-      };
+    };
 
-    const goTo = (text) => {
-        navigation.navigate('SearchScreen', { screen : 'Results', params: {query: text} })
-    }
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const showTimepicker = () => {
+        showMode('time');
+    };
+
+
     const signUpRequest = () => {
         new AuthApi(Configuration, 'http://localhost:3000').authControllerGetAccessToken({email: email,password: password})
             .then( (res) => {
@@ -97,7 +95,7 @@ const SignUp = ({navigation}) => {
             style={{
                 flex: 1,
             }}>
-            <Header goTo={goTo} />
+            <Header />
             <Modal
                 animationType="slide"
                 transparent={true}

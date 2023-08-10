@@ -94,15 +94,13 @@ const response2 = [
 ]
 
 const Home = ({ navigation }) => {
-    const goTo = (text) => {
-        navigation.navigate('SearchScreen', { screen : 'Results', params: {query: text} })
-    }
+
     return (
         <ScrollView
             style={{
                 flex: 1
             }}>
-            <Header mode='transparent' goTo={goTo} />
+            <Header mode='transparent'/>
             <ImageBackground source={require('../assets/images/home-header.png')} resizeMode="cover" style={{ width: '100%', height: 400 }}>
                 <View style={styles.cardContainer}>
                     <View style={styles.card}>

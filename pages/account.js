@@ -17,9 +17,6 @@ const styles = StyleSheet.create({
 const Account = ({ navigation }) => {
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
-    const goTo = (text) => {
-        navigation.navigate('SearchScreen', { screen: 'Results', params: { query: text } })
-    }
 
     return (
         <ScrollView

@@ -53,9 +53,6 @@ const Product = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
     const dispatch = useDispatch()
-    const goTo = (text) => {
-        props.navigation.navigate('SearchScreen', { screen: 'Results', params: { query: text } })
-    }
     const goToCart = () => {
         setModalVisible(false)
         props.navigation.navigate('CartScreen', { screen: 'Cart' })
@@ -75,7 +72,7 @@ const Product = (props) => {
             style={{
                 flex: 1,
             }}>
-            <Header goTo={goTo} />
+            <Header />
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -102,11 +99,11 @@ const Product = (props) => {
                     <View style={{ flex: 1 }}>
                         {props.route.params.item.ratings.length > 0 ? props.route.params.item.ratings.reduce((accumulator, currentValue) =>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                {(accumulator.rating + currentValue.rating) / props.route.params.item.ratings.length > 1 ? <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star.svg')} />}
-                                {(accumulator.rating + currentValue.rating) / props.route.params.item.ratings.length > 2 ? <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star.svg')} />}
-                                {(accumulator.rating + currentValue.rating) / props.route.params.item.ratings.length > 3 ? <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star.svg')} />}
-                                {(accumulator.rating + currentValue.rating) / props.route.params.item.ratings.length > 4 ? <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star.svg')} />}
-                                {(accumulator.rating + currentValue.rating) / props.route.params.item.ratings.length > 5 ? <Image style={{ width: 15, height: 15, marginRight: 5 }} source={require('../assets/images/star-yellow.svg')} /> : <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star.svg')} />}
+                                {(accumulator.rating + currentValue.rating) / props.route.params.item.ratings.length > 1 ? <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star-yellow.png')} /> : <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star.png')} />}
+                                {(accumulator.rating + currentValue.rating) / props.route.params.item.ratings.length > 2 ? <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star-yellow.png')} /> : <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star.png')} />}
+                                {(accumulator.rating + currentValue.rating) / props.route.params.item.ratings.length > 3 ? <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star-yellow.png')} /> : <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star.png')} />}
+                                {(accumulator.rating + currentValue.rating) / props.route.params.item.ratings.length > 4 ? <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star-yellow.png')} /> : <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star.png')} />}
+                                {(accumulator.rating + currentValue.rating) / props.route.params.item.ratings.length > 5 ? <Image style={{ width: 15, height: 15, marginRight: 5 }} source={require('../assets/images/star-yellow.png')} /> : <Image style={{ width: 15, height: 15 }} source={require('../assets/images/star.png')} />}
                                 <Text style={{ marginLeft: 5 }}>{(accumulator.rating + currentValue.rating) / props.route.params.item.ratings.length + '/5'}</Text>
                             </View>
                         ) : <Text style={{ fontStyle: 'italic' }}>Soyez le premier à donner votre avis</Text>
@@ -137,6 +134,16 @@ const Product = (props) => {
                     <Text style={{ fontWeight: 'bold', marginTop: '1rem', marginBottom: '0.5rem' }}>Description technique</Text>
                     <Text >{props.route.params.item.technicalDescription}</Text>
                 </View>
+                {
+                    props.route.params.item.comments.length > 0 ? 
+                        <View>
+                            <Text>Commentaires</Text>
+                            <Text>
+                                {console.log(props.route.params.item.comments)} 
+                            </Text>
+                        </View>
+                        : null
+                }
             </View>
 
         </ScrollView>

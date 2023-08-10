@@ -42,9 +42,6 @@ const Login = ({navigation}) => {
     const [modalMessage, setModalMessage] = useState(false)
     const dispatch = useDispatch()
 
-    const goTo = (text) => {
-        navigation.navigate('SearchScreen', { screen : 'Results', params: {query: text} })
-    }
     const loginRequest = () => {
         new AuthApi(Configuration, 'http://localhost:3000').authControllerGetAccessToken({email: email,password: password})
             .then( (res) => {
@@ -63,7 +60,7 @@ const Login = ({navigation}) => {
             style={{
                 flex: 1,
             }}>
-            <Header goTo={goTo} />
+            <Header />
             <Modal
                 animationType="slide"
                 transparent={true}

@@ -6,9 +6,6 @@ import { resetCart, deleteInCart, calculateTotal } from '../features/cartSlice.j
 import { useDispatch } from 'react-redux'
 
 const Cart = ({navigation}) => {
-    const goTo = (text) => {
-        navigation.navigate('SearchScreen', { screen : 'Results', params: {query: text} })
-    }
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
     const [total, setTotal] = useState(null);
@@ -22,7 +19,7 @@ const Cart = ({navigation}) => {
         style={{
           flex: 1,
         }}>
-            <Header goTo={goTo} />
+            <Header />
             <Text style={{margin: 15, marginTop:20, fontSize: 25, fontWeight:'bold'}}>Votre panier : </Text>
             <View style= {{margin: 15,  marginTop:5, padding: 15, backgroundColor:'#2D2D2D', borderRadius: 5}}>
                 <FlatList style={{flex:1}} data={cart.value} keyExtractor={item => item.id} renderItem={({item, index, separators}) => (
@@ -34,7 +31,7 @@ const Cart = ({navigation}) => {
                                 <Text style={{fontSize: 15, marginRight: 10, fontWeight: 'bold', color: 'white'}}>{item.price}€</Text>
                                 <Text style={{fontSize: 15, marginRight: 10, fontWeight: 'bold', color: 'white'}}>Quantité : {item.quantity}</Text>
                                 <TouchableHighlight onPress={() => dispatch(deleteInCart(item.id))}>
-                                    <Image style={{width: 20, height: 20}} source={require('../assets/images/trash.svg')} />
+                                    <Image style={{width: 20, height: 20}} source={require('../assets/images/trash.png')} />
                                 </TouchableHighlight>
                             </View>
                         </View>
