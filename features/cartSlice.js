@@ -5,7 +5,7 @@ export const cartSlice = createSlice({
     initialState: {
         value: [],
         error: false,
-        total: null
+        total: 0
     },
     reducers: {
         addToCart: (state, action) => {
@@ -31,11 +31,20 @@ export const cartSlice = createSlice({
                 state.value = [item]
             }
         },
+        deleteInCart(state, action) {
+            // const found = state.value.find(element => element.id == action.payload)
+            // const product = (element) => element.id = action.payload
+            console.log(action.payload)
+            const index = state.value.findIndex((element) => element.id == action.payload)
+            state.value = [...state.value.slice(0, index), ...state.value.slice(index+1)]
+        },
         calculateTotal(state) {
             if (state.value.length > 0) {
-                state.value.reduce((accumulator, currentValue) => {
-                    state.total = accumulator.price + currentValue.price
-                })
+                let total = state.value.reduce((accumulator, currentValue) =>  accumulator + (currentValue.price * currentValue.quantity), 0)
+                state.total = total + 5.99
+            }
+            else {
+                state.total = null
             }
         },
         resetCartError: (state) => {
@@ -49,7 +58,7 @@ export const cartSlice = createSlice({
 
 
 
-export const { addToCart, resetCart, resetCartError, calculateTotal } = cartSlice.actions
+export const { addToCart, deleteInCart, resetCart, resetCartError, calculateTotal } = cartSlice.actions
 
 export default cartSlice.reducer
 

@@ -17,19 +17,27 @@ import { Provider } from 'react-redux'
 import { useSelector, useDispatch } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { checkToken } from './features/userSlice.js';
-import { useEffect } from 'react'
-import './assets/styles/index.css'
+import { useEffect, useState } from 'react'
+// import './assets/styles/index.css'
 
 export default function App() {
   const AppContainer = () => {
     const dispatch = useDispatch()
-    const cartCount = useSelector(state => state.cart.value)
+    let cartCount = 0
+    const [nbProductsInCart, setNbProductsInCart] = useState(0)
+    const cart = useSelector(state => state.cart.value)
     const user = useSelector(state => state.user)
     useEffect(() => {
       if (user.token) {
         dispatch(checkToken(user.token))
       }
-    }, [user.token])
+      if(cart.length > 0) {
+        cart.forEach(element => {
+          cartCount += element.quantity
+        })
+        setNbProductsInCart(cartCount)
+      }
+    }, [user.token, cart])
     const HomeStack = createNativeStackNavigator();
 
     function HomeStackScreen() {
@@ -106,7 +114,7 @@ export default function App() {
             }} />
             <Tab.Screen name="CartScreen" component={CartStackScreen} options={{
               // title: 'Cart',
-              tabBarBadge: cartCount.length > 0 ? cartCount.length : null,
+              tabBarBadge: nbProductsInCart == 0 ? null : nbProductsInCart,
               tabBarIcon: ({ color, size }) => (
                 <MaterialCommunityIcons name="cart" color={color} size={size} />
               )

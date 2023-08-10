@@ -27,7 +27,7 @@ const Account = ({ navigation }) => {
                 flex: 1,
             }}>
             <Header goTo={goTo} />
-            <View style={{ margin: 10, padding: 15, backgroundColor: '#2D2D2D' }}>
+            <View style={{ margin: 10, marginTop:20, padding: 15, backgroundColor: '#2D2D2D', borderRadius: 3 }}>
                 <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>Bonjour {user.value.firstname} {user.value.lastname}</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 5, marginTop: 30, marginBottom: 5 }}>
                     <TouchableHighlight style={styles.buttons}>

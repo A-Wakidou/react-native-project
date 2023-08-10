@@ -11,13 +11,18 @@ const Results = (props) => {
   }
 
   useEffect(() => {
-    new ProductsApi(Configuration, 'http://localhost:3000').productsControllerFindAllBy({ data: { query: props.route.params.query } })
-      .then((res) => {
-        setData(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    if(props.route.params.query) {
+      new ProductsApi(Configuration, 'http://localhost:3000').productsControllerFindAllBy({ data: { query: props.route.params.query } })
+        .then((res) => {
+          setData(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+    if(props.route.params.category) {
+      
+    }
   }, [])
 
   return (

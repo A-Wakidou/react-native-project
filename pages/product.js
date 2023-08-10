@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Header from '../components/header.js';
 import ImagesCarouselBoutons from '../components/imagesCarouselBoutons.js';
 import { useDispatch } from 'react-redux'
-import { addToCart, resetCart, resetCartError } from '../features/cartSlice.js';
+import { addToCart, resetCartError } from '../features/cartSlice.js';
 import { useSelector } from 'react-redux'
 
 const styles = StyleSheet.create({
@@ -62,11 +62,6 @@ const Product = (props) => {
     }
     const addProductToCart = () => {
         dispatch(addToCart({ item: props.route.params.item, amount: selectedValue }))
-        if (!cart.error) {
-            setModalMessage('Ajouté au panier !')
-            setModalVisible(true)
-            console.log(modalVisible)
-        }
     }
     const createPickerItems = () => {
         let items = []
@@ -84,19 +79,6 @@ const Product = (props) => {
             <Modal
                 animationType="slide"
                 transparent={true}
-                visible={modalVisible}>
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>{modalMessage}</Text>
-                        <Button title='Votre Panier' onPress={() => goToCart()} style={{ marginBottom: 10 }} />
-                        <Button title='Continuer vos achats' onPress={() => setModalVisible(false)} />
-                        <Button title='Vider le panier' onPress={() => dispatch(resetCart())} />
-                    </View>
-                </View>
-            </Modal>
-            <Modal
-                animationType="slide"
-                transparent={true}
                 visible={cart.error}>
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
@@ -109,9 +91,9 @@ const Product = (props) => {
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
                     <Image style={{ width: '80%', height: 300 }} resizeMode="contain" source={props.route.params.item.images[0].url} />
                     <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
-                        <Image style={{ width: '100%', height: 100 }} resizeMode="contain" source={props.route.params.item.images[0].url} />
-                        <Image style={{ width: '100%', height: 100 }} resizeMode="contain" source={props.route.params.item.images[0].url} />
-                        <Image style={{ width: '100%', height: 100 }} resizeMode="contain" source={props.route.params.item.images[0].url} />
+                    {props.route.params.item.images.map( (image) => (
+                        <Image key={image.id} style={{ width: '100%', height: 100 }} resizeMode="contain" source={image.url} />
+                    ))}
                     </View>
                 </View>
                 <ImagesCarouselBoutons />
@@ -130,7 +112,7 @@ const Product = (props) => {
                         ) : <Text style={{ fontStyle: 'italic' }}>Soyez le premier à donner votre avis</Text>
                         }
                         {
-                            props.route.params.item.comments.length > 0 ? <Text style={{ fontStyle: 'italic' }}> {props.route.params.item.comments.length} commentaires </Text> : <Text style={{ fontSize: '0.65rem', fontStyle: 'italic' }}> 0 commentaires </Text>
+                            props.route.params.item.comments.length > 0 ? <Text style={{ fontStyle: 'italic' }}>{props.route.params.item.comments.length} commentaire{props.route.params.item.comments.length == 1 ? null : 's'} </Text> : <Text style={{ fontSize: '0.65rem', fontStyle: 'italic' }}> 0 commentaire </Text>
                         }
                     </View>
                     <View>
@@ -145,13 +127,15 @@ const Product = (props) => {
                             </Picker>
                         </View>
                         <Button onPress={() => addProductToCart()} title="Ajouter au panier" color="#2D2D2D" />
-                        <Button title='reset' onPress={() => dispatch(resetCart())} />
-
                     </View>
                 </View>
                 <View>
                     <Text style={{ fontWeight: 'bold', marginTop: '1rem', marginBottom: '0.5rem' }}>Description</Text>
                     <Text >{props.route.params.item.description}</Text>
+                </View>
+                <View>
+                    <Text style={{ fontWeight: 'bold', marginTop: '1rem', marginBottom: '0.5rem' }}>Description technique</Text>
+                    <Text >{props.route.params.item.technicalDescription}</Text>
                 </View>
             </View>
 

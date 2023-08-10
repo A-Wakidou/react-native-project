@@ -4,10 +4,11 @@ import Header from '../components/header.js';
 import { useSelector } from 'react-redux'
 import { StripeApi } from '../client/api.ts';
 import { Configuration } from '../client/configuration.ts';
+import * as Linking from 'expo-linking';
 
 const Purchase = ({navigation}) => {
+    const user = useSelector(state => state.user)
     const cart = useSelector(state => state.cart)
-    console.log(cart);
     const [step, setStep] = useState(1)
     const [formStep1, setFormStep1] = useState({
         name: '',
@@ -23,13 +24,18 @@ const Purchase = ({navigation}) => {
     const getDeliveryDate = () => {
         let today = new Date();
         let dd = String(today.getDate()+3).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let mm = String(today.getMonth() + 1).padStart(2, '0');
         let yyyy = today.getFullYear();
-
         return dd + '/' + mm + '/' + yyyy;
     }
     const stripeCheckout = () => {
-        new StripeApi(Configuration, 'http://localhost:3000').stripeControllerCheckout({data: cart.value})
+        new StripeApi(Configuration, 'http://localhost:3000').stripeControllerCheckout([{productName: "hi",quantity: 1}], 'Bearer '+user.token)
+        .then( (res) => {
+            Linking.openURL(res.data.url);
+        })
+        .catch( (err) => {
+            console.log(err)
+        })
     }
     return (
         <ScrollView
@@ -70,14 +76,14 @@ const Purchase = ({navigation}) => {
                             <View style={{flex:1}}>
                                 <Text style={{color:'white', fontWeight:'bold', fontSize:8}}>Votre nom :</Text>
                                 <TextInput
-                                    style={{height:30, marginTop:5}}
+                                    style={{height:30, marginTop:5, color:'white'}}
                                     onChangeText={(value) => setFormStep1(prev => ({...prev, name:value}))}
                                 />
                             </View>
                             <View style={{flex:1}}>
                                 <Text style={{color:'white', fontWeight:'bold', fontSize:8}}>Votre prénom :</Text>
                                 <TextInput
-                                    style={{height:30, marginTop:5}}
+                                    style={{height:30, marginTop:5, color:'white'}}
                                     onChangeText={(value) => setFormStep1(prev => ({...prev, firstname:value}))}
                                 />
                             </View>
@@ -85,7 +91,7 @@ const Purchase = ({navigation}) => {
                         <View style={{marginTop:10}}>
                             <Text style={{color:'white', fontWeight:'bold', fontSize:8}}>Votre email</Text>
                             <TextInput
-                                style={{height:30, marginTop:5}}
+                                style={{height:30, marginTop:5, color:'white'}}
                                 onChangeText={(value) => setFormStep1(prev => ({...prev, email:value}))}
                             />
                         </View>
@@ -126,7 +132,7 @@ const Purchase = ({navigation}) => {
                     <View style={{marginTop: 30}}>
                         <Text style={{fontSize: 16, fontWeight:'bold', color: 'white'}}>Vos produits</Text>
                         <View style={{flex: 1, flexDirection:'row', gap: 10}}>
-                            <View style={{flex:2}}>
+                            <View style={{flex:2, padding: 5, borderRightColor: 'white', borderRightWidth: 1}}>
                                 <FlatList data={cart.value} keyExtractor={data => data.id} renderItem={({item, index, separators}) => (
                                     <View style={{flex:1, flexDirection: 'row', alignItems:'center', gap: 5}}>
                                         <View style={{flex:1}}>
@@ -154,7 +160,7 @@ const Purchase = ({navigation}) => {
                             <Text style={{color:'white', fontSize:15, fontWeight:'bold', marginTop:30, textDecorationLine:"underline"}}>Informations de livraison</Text>
                             <Text style={{color:'white'}}>{formStep1.name} {formStep1.firstname}</Text>
                             <Text style={{color:'white'}}>{formStep1.address}</Text>
-                            <Text style={{color:'white', fontStyle:'italic'}}>Date de livraison estimée : {getDeliveryDate()}</Text>
+                            <Text style={{color:'white', fontStyle:'italic', marginBottom:5}}>Date de livraison estimée : {getDeliveryDate()}</Text>
                             <Button title='Passer au paiement' onPress={() => stripeCheckout()} />
                         </View>
                     </View>
