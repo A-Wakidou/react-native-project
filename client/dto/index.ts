@@ -6,6 +6,7 @@ export * from './create-payment-dto';
 export * from './create-product-dto';
 export * from './create-products-images-dto';
 export * from './create-rating-dto';
+export * from './create-stripe-price-dto';
 export * from './create-stripe-product-dto';
 export * from './create-user-dto';
 export * from './login-dto';

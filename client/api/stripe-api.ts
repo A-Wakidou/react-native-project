@@ -22,6 +22,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { CreateStripePriceDto } from '../dto';
+// @ts-ignore
 import { CreateStripeProductDto } from '../dto';
 // @ts-ignore
 import { PaymentCheckOutDto } from '../dto';
@@ -115,12 +117,86 @@ export const StripeApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @param {CreateStripePriceDto} createStripePriceDto 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stripeControllerCreatePrice: async (createStripePriceDto: CreateStripePriceDto, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createStripePriceDto' is not null or undefined
+            assertParamExists('stripeControllerCreatePrice', 'createStripePriceDto', createStripePriceDto)
+            const localVarPath = `/stripe/prices`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization != null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createStripePriceDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         stripeControllerFindAll: async (authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/stripe/products`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization != null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stripeControllerFindAllPrices: async (authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/stripe/prices`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -158,6 +234,44 @@ export const StripeApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'id' is not null or undefined
             assertParamExists('stripeControllerFindOne', 'id', id)
             const localVarPath = `/stripe/products/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization != null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stripeControllerFindOnePrice: async (id: number, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('stripeControllerFindOnePrice', 'id', id)
+            const localVarPath = `/stripe/prices/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -296,6 +410,44 @@ export const StripeApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stripeControllerUpdatePrice: async (id: number, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('stripeControllerUpdatePrice', 'id', id)
+            const localVarPath = `/stripe/prices/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (authorization != null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -330,12 +482,33 @@ export const StripeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {CreateStripePriceDto} createStripePriceDto 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async stripeControllerCreatePrice(createStripePriceDto: CreateStripePriceDto, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.stripeControllerCreatePrice(createStripePriceDto, authorization, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async stripeControllerFindAll(authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.stripeControllerFindAll(authorization, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async stripeControllerFindAllPrices(authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.stripeControllerFindAllPrices(authorization, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -347,6 +520,17 @@ export const StripeApiFp = function(configuration?: Configuration) {
          */
         async stripeControllerFindOne(id: string, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.stripeControllerFindOne(id, authorization, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async stripeControllerFindOnePrice(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.stripeControllerFindOnePrice(id, authorization, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -381,6 +565,17 @@ export const StripeApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.stripeControllerUpdate(id, updateStripeProductDto, authorization, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @param {number} id 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async stripeControllerUpdatePrice(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.stripeControllerUpdatePrice(id, authorization, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -413,12 +608,31 @@ export const StripeApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
+         * @param {CreateStripePriceDto} createStripePriceDto 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stripeControllerCreatePrice(createStripePriceDto: CreateStripePriceDto, authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.stripeControllerCreatePrice(createStripePriceDto, authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {string} [authorization] JWT Token
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         stripeControllerFindAll(authorization?: string, options?: any): AxiosPromise<void> {
             return localVarFp.stripeControllerFindAll(authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stripeControllerFindAllPrices(authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.stripeControllerFindAllPrices(authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -429,6 +643,16 @@ export const StripeApiFactory = function (configuration?: Configuration, basePat
          */
         stripeControllerFindOne(id: string, authorization?: string, options?: any): AxiosPromise<void> {
             return localVarFp.stripeControllerFindOne(id, authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stripeControllerFindOnePrice(id: number, authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.stripeControllerFindOnePrice(id, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -458,6 +682,16 @@ export const StripeApiFactory = function (configuration?: Configuration, basePat
          */
         stripeControllerUpdate(id: string, updateStripeProductDto: UpdateStripeProductDto, authorization?: string, options?: any): AxiosPromise<void> {
             return localVarFp.stripeControllerUpdate(id, updateStripeProductDto, authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {string} [authorization] JWT Token
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stripeControllerUpdatePrice(id: number, authorization?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.stripeControllerUpdatePrice(id, authorization, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -495,6 +729,18 @@ export class StripeApi extends BaseAPI {
 
     /**
      * 
+     * @param {CreateStripePriceDto} createStripePriceDto 
+     * @param {string} [authorization] JWT Token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StripeApi
+     */
+    public stripeControllerCreatePrice(createStripePriceDto: CreateStripePriceDto, authorization?: string, options?: AxiosRequestConfig) {
+        return StripeApiFp(this.configuration).stripeControllerCreatePrice(createStripePriceDto, authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {string} [authorization] JWT Token
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -502,6 +748,17 @@ export class StripeApi extends BaseAPI {
      */
     public stripeControllerFindAll(authorization?: string, options?: AxiosRequestConfig) {
         return StripeApiFp(this.configuration).stripeControllerFindAll(authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} [authorization] JWT Token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StripeApi
+     */
+    public stripeControllerFindAllPrices(authorization?: string, options?: AxiosRequestConfig) {
+        return StripeApiFp(this.configuration).stripeControllerFindAllPrices(authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -514,6 +771,18 @@ export class StripeApi extends BaseAPI {
      */
     public stripeControllerFindOne(id: string, authorization?: string, options?: AxiosRequestConfig) {
         return StripeApiFp(this.configuration).stripeControllerFindOne(id, authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {string} [authorization] JWT Token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StripeApi
+     */
+    public stripeControllerFindOnePrice(id: number, authorization?: string, options?: AxiosRequestConfig) {
+        return StripeApiFp(this.configuration).stripeControllerFindOnePrice(id, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -549,5 +818,17 @@ export class StripeApi extends BaseAPI {
      */
     public stripeControllerUpdate(id: string, updateStripeProductDto: UpdateStripeProductDto, authorization?: string, options?: AxiosRequestConfig) {
         return StripeApiFp(this.configuration).stripeControllerUpdate(id, updateStripeProductDto, authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {string} [authorization] JWT Token
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StripeApi
+     */
+    public stripeControllerUpdatePrice(id: number, authorization?: string, options?: AxiosRequestConfig) {
+        return StripeApiFp(this.configuration).stripeControllerUpdatePrice(id, authorization, options).then((request) => request(this.axios, this.basePath));
     }
 }

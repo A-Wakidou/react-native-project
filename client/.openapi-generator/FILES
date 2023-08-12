@@ -23,6 +23,7 @@ dto/create-payment-dto.ts
 dto/create-product-dto.ts
 dto/create-products-images-dto.ts
 dto/create-rating-dto.ts
+dto/create-stripe-price-dto.ts
 dto/create-stripe-product-dto.ts
 dto/create-user-dto.ts
 dto/index.ts
