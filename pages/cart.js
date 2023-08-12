@@ -9,7 +9,7 @@ const Cart = ({navigation}) => {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
     const [total, setTotal] = useState(null);
-
+    console.log(cart)
     useEffect( () => {
         dispatch(calculateTotal())
     }, [])

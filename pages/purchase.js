@@ -26,7 +26,11 @@ const Purchase = ({navigation}) => {
         return dd + '/' + mm + '/' + yyyy;
     }
     const stripeCheckout = () => {
-        new StripeApi(Configuration, 'http://localhost:3000').stripeControllerCheckout([{productName: "hi",quantity: 1}], 'Bearer '+user.token)
+        let checkoutDTO = []
+        cart.value.forEach(element => {
+            checkoutDTO.push({productName:element.title, quantity: element.quantity})
+        });
+        new StripeApi(Configuration, 'http://localhost:3000').stripeControllerCheckout(checkoutDTO, 'Bearer '+user.token)
         .then( (res) => {
             Linking.openURL(res.data.url);
         })
@@ -40,8 +44,8 @@ const Purchase = ({navigation}) => {
           flex: 1,
         }}>
             <Header />
-            <Text style={{margin: 15, marginTop:'2rem', fontSize: 18, fontWeight:'bold'}}>Informations complémentaires</Text>
-            <View style={{margin: 15,  marginTop:'0.5rem', padding: 15, justifyContent:'center', backgroundColor:'#2D2D2D', borderRadius:5}}>
+            <Text style={{margin: 15, marginTop:20, fontSize: 18, fontWeight:'bold'}}>Informations complémentaires</Text>
+            <View style={{margin: 15,  marginTop:5, padding: 15, justifyContent:'center', backgroundColor:'#2D2D2D', borderRadius:5}}>
                 <View style={{flexDirection: 'row'}}>
                     <View style={{flex:1, alignItems:'center'}}>
                         <Text style={{fontSize:8, fontWeight:'bold', color: step == 1 | 2 ? '#5F9EC2' : 'white'}}>Étape 1/3</Text>

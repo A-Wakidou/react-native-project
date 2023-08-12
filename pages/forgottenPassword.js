@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: '1rem'
+        fontSize: 10
     }
 })
 
@@ -69,7 +69,7 @@ const ForgottenPassword = ({ navigation }) => {
                 </View>
             </Modal>
             <View style={{ height: 600, margin: 10, marginTop: 20, backgroundColor: '#2D2D2D', borderRadius: 5 }}>
-                <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.2rem', marginTop: 30, color: 'white' }}>Mot de passe oublié</Text>
+                <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 12, marginTop: 30, color: 'white' }}>Mot de passe oublié</Text>
                 <View style={{ margin: 20, padding: 10, paddingTop: 30, paddingBottom: 30, backgroundColor: 'white', borderRadius: 5 }}>
                     <Text style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: 10 }}>Email</Text>
                     <TextInput onChangeText={(value) => setEmail(value)} style={{ border: '1px solid black', color: 'black', marginBottom: 15, height: 30 }} />

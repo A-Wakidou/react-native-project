@@ -84,7 +84,7 @@ const Product = (props) => {
                     </View>
                 </View>
             </Modal>
-            <View style={{ padding: '1rem', }}>
+            <View style={{ padding: 10, }}>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
                     <Image style={{ width: '80%', height: 300 }} resizeMode="contain" source={props.route.params.item.images[0].url} />
                     <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
@@ -94,8 +94,8 @@ const Product = (props) => {
                     </View>
                 </View>
                 <ImagesCarouselBoutons />
-                <Text style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{props.route.params.item.title}</Text>
-                <View style={{ flexDirection: 'row', marginTop: '0.5rem' }}>
+                <Text style={{ fontSize:20, fontWeight: 'bold' }}>{props.route.params.item.title}</Text>
+                <View style={{ flexDirection: 'row', marginTop: 10 }}>
                     <View style={{ flex: 1 }}>
                         {props.route.params.item.ratings.length > 0 ? props.route.params.item.ratings.reduce((accumulator, currentValue) =>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -109,12 +109,12 @@ const Product = (props) => {
                         ) : <Text style={{ fontStyle: 'italic' }}>Soyez le premier à donner votre avis</Text>
                         }
                         {
-                            props.route.params.item.comments.length > 0 ? <Text style={{ fontStyle: 'italic' }}>{props.route.params.item.comments.length} commentaire{props.route.params.item.comments.length == 1 ? null : 's'} </Text> : <Text style={{ fontSize: '0.65rem', fontStyle: 'italic' }}> 0 commentaire </Text>
+                            props.route.params.item.comments.length > 0 ? <Text style={{ fontStyle: 'italic' }}>{props.route.params.item.comments.length} commentaire{props.route.params.item.comments.length == 1 ? null : 's'} </Text> : <Text style={{ fontSize: 6, fontStyle: 'italic' }}> 0 commentaire </Text>
                         }
                     </View>
                     <View>
-                        <View style={{ marginBottom: '1rem', flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            <Text style={{ fontSize: '1.5rem', fontWeight: 'bold', marginRight: 5 }}>{props.route.params.item.price}€</Text>
+                        <View style={{ marginBottom: 10, flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <Text style={{ fontSize: 15, fontWeight: 'bold', marginRight: 5 }}>{props.route.params.item.price}€</Text>
                             <Picker
                                 selectedValue={selectedValue}
                                 style={{ height: 35, width: 40 }}
@@ -127,20 +127,25 @@ const Product = (props) => {
                     </View>
                 </View>
                 <View>
-                    <Text style={{ fontWeight: 'bold', marginTop: '1rem', marginBottom: '0.5rem' }}>Description</Text>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Description</Text>
                     <Text >{props.route.params.item.description}</Text>
                 </View>
                 <View>
-                    <Text style={{ fontWeight: 'bold', marginTop: '1rem', marginBottom: '0.5rem' }}>Description technique</Text>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Description technique</Text>
                     <Text >{props.route.params.item.technicalDescription}</Text>
                 </View>
                 {
                     props.route.params.item.comments.length > 0 ? 
                         <View>
-                            <Text>Commentaires</Text>
-                            <Text>
-                                {console.log(props.route.params.item.comments)} 
-                            </Text>
+                            <Text style={{ fontSize: 15, fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Commentaires</Text>
+                            {
+                                props.route.params.item.comments.map( comment => (
+                                    <View style={{padding: 10, borderWidth: 1, borderRadius: 5, borderColor:'grey'}} key={comment.id}>
+                                        <Text style={{ fontWeight: 500,marginBottom: 5 }}>{comment.user.firstname.charAt(0).toUpperCase() + comment.user.firstname.slice(1)} {comment.user.lastname.charAt(0).toUpperCase() + comment.user.lastname.slice(1)}</Text>
+                                        <Text style={{fontStyle:'italic'}}>{comment.comment}</Text>
+                                    </View>
+                                ))
+                            }
                         </View>
                         : null
                 }
