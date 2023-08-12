@@ -42,7 +42,7 @@ export default function App() {
 
     function HomeStackScreen() {
       return (
-        <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+        <HomeStack.Navigator screenOptions={{ headerShown: false, contentStyle: {backgroundColor: '#FFFFFF'} }}>
           <HomeStack.Screen name="Home" component={Home} />
         </HomeStack.Navigator>
       );
@@ -52,7 +52,7 @@ export default function App() {
 
     function CartStackScreen() {
       return (
-        <CartStack.Navigator screenOptions={{ headerShown: false }}>
+        <CartStack.Navigator screenOptions={{ headerShown: false, contentStyle: {backgroundColor: '#FFFFFF'} }}>
           <CartStack.Screen name="Cart" component={Cart} />
           <CartStack.Screen name="Purchase" component={Purchase} />
         </CartStack.Navigator>
@@ -63,13 +63,13 @@ export default function App() {
 
     function AccountStackScreen() {
       if (user.isLoggedIn) return (
-        <AccountStack.Navigator screenOptions={{ headerShown: false }}>
+        <AccountStack.Navigator screenOptions={{ headerShown: false, contentStyle: {backgroundColor: '#FFFFFF'} }}>
           <AccountStack.Screen name="Account" component={Account} />
         </AccountStack.Navigator >
       )
       else {
         return (
-          <AccountStack.Navigator screenOptions={{ headerShown: false }}>
+          <AccountStack.Navigator screenOptions={{ headerShown: false, contentStyle: {backgroundColor: '#FFFFFF'} }}>
             <AccountStack.Screen name="Login" component={Login} />
           </AccountStack.Navigator>
         )
@@ -80,7 +80,7 @@ export default function App() {
 
     function SearchStackScreen() {
       return (
-        <SearchStack.Navigator screenOptions={{ headerShown: false }}>
+        <SearchStack.Navigator screenOptions={{ headerShown: false, contentStyle: {backgroundColor: '#FFFFFF'} }}>
           <SearchStack.Screen name="Search" component={Search} />
           <SearchStack.Screen name="Results" component={Results} />
           <SearchStack.Screen name="Product" component={Product} />
